@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container main-container">
+    <h1 class="top-heading">Invest Better with <span>Hatem Tai</span> <br> Stock Advisor</h1>
+
+    <div class="col-md-4 offset-md-4 form-box">
+      {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong>
+            </div>
+        {% endfor %}
+     {% endif %}
+      <h3 class="form-title text-center">Sign In</h3>
+      <form method="post" action="/accounts/login/">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" required>
+
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Remember me</label>
+          <a href="/reset_password/" class="forgot-link">Forgot password ?</a>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 theme-btn-colors">Sign In</button>
+      </form>
+      <br />
+      <form class="d-flex" action="/register" method="get">
+          <button class="btn btn-primary w-100 theme-btn-colors" type="submit">Sign Up</button>
+      </form>
+    </div>
+
+
+
+  </div>
+{% endblock %}

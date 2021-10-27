@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container main-container">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email Address</th>
+          <th scope="col">Role</th>
+          {% if request.user.is_superuser %}
+          <th scope="col">Action</th>
+          {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.role}}</td>
+          {% if request.user.is_superuser %}
+          <td>
+            <form class="d-flex" action="/users/" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="user_id" value="{{user.id}}" id="user_id">
+              {% if user.role == 'User' %}
+              <button class="btn btn-success navbt " type="submit">Make Admin</button>
+              {% else %}
+              <button class="btn btn-danger navbt " type="submit">Dismiss as Admin</button>
+              {% endif %}
+            </form>
+          </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+{% endblock %}
+

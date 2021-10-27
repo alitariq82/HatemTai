@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container main-container">
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+              <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+              </div>
+            {% endfor %}
+         {% endif %}
+    </div>
+    <div class="row forex_file_upload">
+        <div class="col-md-3">
+            <form method='POST' action="/forex_file_upload/" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" id="forexFile" name="forexFile" required>
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Currency Code</th>
+          <th scope="col">Currency Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fx in forex %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{fx.currency_code}}</td>
+          <td>{{fx.currency_value}}</td>
+          </td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+{% endblock %}
+

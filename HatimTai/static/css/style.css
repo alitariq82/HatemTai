@@ -1,0 +1,180 @@
+body{
+    font-family: 'Roboto';
+}
+.navul{
+    justify-content: end;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+.navbt{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.theme-btn-colors{
+    background-color: #1B75BB;
+}
+.theme-btn-colors:hover{
+    background-color: #0f5a94;
+}
+.bg-light {
+    background-color: #ffffff!important;
+}
+.nav-logo{
+    width: 200px;
+}
+.main-container{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.form-label
+{
+    margin-bottom: 0px;
+}
+.top-heading{
+    font-size: 40px;
+    padding-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+.top-heading span{
+    color: #1B75BB;
+}
+.form-box{
+    -webkit-box-shadow: 0px 0px 36px -8px rgba(0,0,0,0.26);
+-moz-box-shadow: 0px 0px 36px -8px rgba(0,0,0,0.26);
+box-shadow: 0px 0px 36px -8px rgba(0,0,0,0.26);
+border-radius: 10px;
+padding: 20px;
+}
+.forgot-link{
+    float: right;
+}
+
+/* home page css */
+.home-banner{
+    height: 80vh;
+    background-image: url("../images/main-banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 200px;
+    padding-bottom: 100px;
+}
+.top-heading-home{
+    font-size: 60px;
+    padding-bottom: 100px;
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff;
+}
+.top-heading-home span{
+    color: #1B75BB;
+}
+/* ticker */
+
+.wrap{
+    font-size: 10px;
+    color: #000044;
+  bottom: 0;
+    left: 0;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: content-box;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.liveTicker{
+    font-size: 10px;
+    line-height: normal;
+    list-style-type: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0;
+    position: relative;
+    color: #000;
+    display: inline-flex;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-name: ticker;
+    animation-name: ticker;
+    -webkit-animation-duration: 400s;
+    animation-duration: 400s;
+}
+
+.liveTicker:hover{
+ 
+    animation-play-state: paused;
+   
+}
+
+.quote{
+   
+    font-size: 10px;
+    line-height: normal;
+    list-style-type: none;
+    padding: 0 10px 0;
+   
+    font-weight: bold;
+    padding-left: 5px;
+    color: #000044;
+    white-space: nowrap;
+}
+
+.valuedown{
+    font-size: 10px;
+    line-height: normal;
+    list-style-type: none;
+    font-weight: bold;
+    padding: 0 10px 0;
+    padding-left: 2px;
+    color: #ff0000;
+    white-space: nowrap;
+}
+.valueup{
+    font-size: 10px;
+    line-height: normal;
+    list-style-type: none;
+    font-weight: bold;
+    padding: 0 10px 0;
+    padding-left: 2px;
+    color: #008000;
+    white-space: nowrap;
+}
+
+@-webkit-keyframes ticker {
+    0% {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      visibility: visible;
+    }
+    100% {
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+  @keyframes ticker {
+    0% {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      visibility: visible;
+    }
+    100% {
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+/* ticker-end */
+
+/* second sec */
+
+.cal-container{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+/* calander css */
+
+/* calander css end */
