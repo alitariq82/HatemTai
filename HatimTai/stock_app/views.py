@@ -15,6 +15,7 @@ from forex_python.converter import CurrencyRates
 import io
 import csv
 
+
 class Index(View):
     def get(self, request):
         # <view logic>
@@ -98,7 +99,7 @@ class StocksDetail(View):
             date = request.POST.get('date')
             if date:
                 date_processed = process_date(date)
-                stocks_detail = Stocks.objects.filter(created_date=date_processed).first()
+                stocks_detail = Stocks.objects.filter(created_date=date_processed).last()
                 data = {}
                 if stocks_detail:
                     data['script_name'] = stocks_detail.script_name
