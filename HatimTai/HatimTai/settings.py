@@ -83,10 +83,9 @@ WSGI_APPLICATION = 'HatimTai.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hatim_tai3',
-        'USER': 'postgres',
-        'PASSWORD': 'tkxel1234',
-        # 'HOST': 'haversack.carqvlvoxvj5.us-east-1.rds.amazonaws.com',
+        'NAME': 'hatemtai',
+        'USER': 'zeeshan',
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
