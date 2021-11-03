@@ -1,289 +1,237 @@
 {% extends "base.html" %}
 {% load static %}
 
-  {% block content %}
-  <div class="container-fluid home-banner">
-    <h1 class="top-heading-home">Invest Better with <span>Hatem Tai</span> <br> Stock Advisor</h1>
-  </div>
+{% block content %}
 
-  <div class="container-fluid">
-    <div class="wrap">
-      <div id="ticker" class="liveTicker news-scroll">
-      {% for frx in forex %}
-        {% if frx.currency_arrow == 'DOWN' %}
-        <span class="quote"><a href="/Pounds-to-Euros-currency-conversion-page.html" target="_top">GBP/{{frx.currency_code}}</a> = <span
-            class="valuedown">{{frx.currency_value}} ▼</span></span>
-        {% else %}
-        <span class="quote"><a href="/Pounds-to-Australian-Dollars-currency-conversion-page.html"
-            target="_top">GBP/{{frx.currency_code}}</a> = <span class="valueup">{{frx.currency_value}} ▲</span></span>
-        {% endif %}
-      {% endfor %}
-<!--         <span class="quote"><a href="/Pounds-to-Australian-Dollars-currency-conversion-page.html" -->
-<!--             target="_top">GBP/AUD</a> = <span class="valueup">1.86721 ▲</span></span> -->
-<!--         <span class="quote"><a href="/Pounds-to-Canadian-Dollars-currency-conversion-page.html" -->
-<!--             target="_top">GBP/CAD</a> = <span class="valuedown">1.7117 ▼</span></span> -->
-<!--         <span class="quote"><a href="/Pounds-to-Dollars-currency-conversion-page.html" target="_top">GBP/USD</a> = <span -->
-<!--             class="valuedown">1.35687 ▼</span></span> -->
-<!--         <span class="quote"><a href="/Pounds-to-New-Zealand-Dollars-currency-conversion-page.html" -->
-<!--             target="_top">GBP/NZD</a> = <span class="valuedown">1.95067 ▼</span></span> -->
-<!--         <span class="quote"><a href="/Pounds-to-Lira-currency-conversion-page.html" target="_top">GBP/TRY</a> = <span -->
-<!--             class="valueup">12.03817 ▲</span></span> -->
-<!--         <span class="quote"><a href="/Pounds-to-Danish-Krone-currency-conversion-page.html" target="_top">GBP/DKK</a> = -->
-<!--           <span class="valuedown">8.68693 ▼</span></span> -->
-<!--         <span class="quote"><a href="/Pounds-to-Dirhams-currency-conversion-page.html" target="_top">GBP/AED</a> = <span -->
-<!--             class="valuedown">4.97969 ▼</span></span> -->
-<!--         <span class="quote"><a href="/Pounds-to-Norwegian-Krone-currency-conversion-page.html" target="_top">GBP/NOK</a> -->
-<!--           = <span class="valuedown">11.68101 ▼</span></span> -->
-<!--         <span class="quote"><a href="/Pounds-to-Swedish-Krona-currency-conversion-page.html" target="_top">GBP/SEK</a> = -->
-<!--           <span class="valuedown">11.84825 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Swiss-Francs-currency-conversion-page.html" target="_top">GBP/CHF</a> = <span -->
-<!--             class="valuedown">1.26062 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Yen-currency-conversion-page.html" target="_top">GBP/JPY</a> = <span -->
-<!--             class="valueup">150.95734 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Hong-Kong-Dollars-currency-conversion-page.html" target="_top">GBP/HKD</a> = <span -->
-<!--             class="valueup">10.56644 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Mexican-Pesos-currency-conversion-page.html" target="_top">GBP/MXN</a> = <span -->
-<!--             class="valueup">27.88104 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Singapore-Dollars-currency-conversion-page.html" target="_top">GBP/SGD</a> = <span -->
-<!--             class="valueup">1.84241 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-South-African-Rands-currency-conversion-page.html" target="_top">GBP/ZAR</a> = <span -->
-<!--             class="valueup">20.28581 ▲</span></span><span class="quote">Remaining Currencies: </span><span -->
-<!--           class="quote"><a href="/Pounds-to-Dirhams-currency-conversion-page.html" target="_top">GBP/AED</a> = <span -->
-<!--             class="valuedown">4.97969 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Albanian-Lek-currency-conversion-page.html" target="_top">GBP/ALL</a> = <span -->
-<!--             class="valuedown">142.01431 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Neth-Antilles-Guilder-currency-conversion-page.html" target="_top">GBP/ANG</a> = <span -->
-<!--             class="valuedown">2.43014 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Argentine-Pesos-currency-conversion-page.html" target="_top">GBP/ARS</a> = <span -->
-<!--             class="valueup">133.88948 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Australian-Dollars-currency-conversion-page.html" target="_top">GBP/AUD</a> = <span -->
-<!--             class="valueup">1.86721 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Aruba-Florin-currency-conversion-page.html" target="_top">GBP/AWG</a> = <span -->
-<!--             class="valuedown">2.44149 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Barbadian-Dollars-currency-conversion-page.html" target="_top">GBP/BBD</a> = <span -->
-<!--             class="valuedown">2.71277 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Bangladesh-Taka-currency-conversion-page.html" target="_top">GBP/BDT</a> = <span -->
-<!--             class="valuedown">115.98895 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Bulgarian-Lev-currency-conversion-page.html" target="_top">GBP/BGN</a> = <span -->
-<!--             class="valuedown">2.28548 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Bahraini-Dinars-currency-conversion-page.html" target="_top">GBP/BHD</a> = <span -->
-<!--             class="valuedown">0.51128 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Burundi-Franc-currency-conversion-page.html" target="_top">GBP/BIF</a> = <span -->
-<!--             class="valuedown">2690.96682 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Bermuda-Dollar-currency-conversion-page.html" target="_top">GBP/BMD</a> = <span -->
-<!--             class="valuedown">1.35638 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Brunei-Dollar-currency-conversion-page.html" target="_top">GBP/BND</a> = <span -->
-<!--             class="valuedown">1.83859 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Bolivian-Boliviano-currency-conversion-page.html" target="_top">GBP/BOB</a> = <span -->
-<!--             class="valuedown">9.34965 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Brazilian-Reals-currency-conversion-page.html" target="_top">GBP/BRL</a> = <span -->
-<!--             class="valuedown">7.27591 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Bahamian-Dollar-currency-conversion-page.html" target="_top">GBP/BSD</a> = <span -->
-<!--             class="valuedown">1.35638 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Bhutan-Ngultrum-currency-conversion-page.html" target="_top">GBP/BTN</a> = <span -->
-<!--             class="valuedown">100.39651 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Belize-Dollar-currency-conversion-page.html" target="_top">GBP/BZD</a> = <span -->
-<!--             class="valuedown">2.72901 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Canadian-Dollars-currency-conversion-page.html" target="_top">GBP/CAD</a> = <span -->
-<!--             class="valuedown">1.7117 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Swiss-Francs-currency-conversion-page.html" target="_top">GBP/CHF</a> = <span -->
-<!--             class="valuedown">1.26062 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Chilean-Pesos-currency-conversion-page.html" target="_top">GBP/CLP</a> = <span -->
-<!--             class="valuedown">1089.48167 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Yuan-currency-conversion-page.html" target="_top">GBP/CNY</a> = <span -->
-<!--             class="valuedown">8.74723 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Colombian-Peso-currency-conversion-page.html" target="_top">GBP/COP</a> = <span -->
-<!--             class="valuedown">5151.64575 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Costa-Rica-Colon-currency-conversion-page.html" target="_top">GBP/CRC</a> = <span -->
-<!--             class="valuedown">847.52653 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Czech-Koruna-currency-conversion-page.html" target="_top">GBP/CZK</a> = <span -->
-<!--             class="valuedown">29.58841 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Danish-Krone-currency-conversion-page.html" target="_top">GBP/DKK</a> = <span -->
-<!--             class="valuedown">8.68693 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Dominican-Peso-currency-conversion-page.html" target="_top">GBP/DOP</a> = <span -->
-<!--             class="valuedown">76.23538 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Algerian-Dinar-currency-conversion-page.html" target="_top">GBP/DZD</a> = <span -->
-<!--             class="valuedown">186.33701 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Egyptian-Pounds-currency-conversion-page.html" target="_top">GBP/EGP</a> = <span -->
-<!--             class="valueup">21.30932 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Ethiopian-Birr-currency-conversion-page.html" target="_top">GBP/ETB</a> = <span -->
-<!--             class="valuedown">62.79312 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Euros-currency-conversion-page.html" target="_top">GBP/EUR</a> = <span -->
-<!--             class="valuedown">1.16865 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Fiji-Dollar-currency-conversion-page.html" target="_top">GBP/FJD</a> = <span -->
-<!--             class="valuedown">2.85559 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Gambian-Dalasi-currency-conversion-page.html" target="_top">GBP/GMD</a> = <span -->
-<!--             class="valuedown">69.92153 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Guinea-Franc-currency-conversion-page.html" target="_top">GBP/GNF</a> = <span -->
-<!--             class="valuedown">13211.79524 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Guatemala-Quetzal-currency-conversion-page.html" target="_top">GBP/GTQ</a> = <span -->
-<!--             class="valuedown">10.47917 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Hong-Kong-Dollars-currency-conversion-page.html" target="_top">GBP/HKD</a> = <span -->
-<!--             class="valueup">10.56644 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Honduras-Lempira-currency-conversion-page.html" target="_top">GBP/HNL</a> = <span -->
-<!--             class="valuedown">32.61537 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Croatian-Kuna-currency-conversion-page.html" target="_top">GBP/HRK</a> = <span -->
-<!--             class="valuedown">8.75192 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Haiti-Gourde-currency-conversion-page.html" target="_top">GBP/HTG</a> = <span -->
-<!--             class="valuedown">133.35556 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Hungarian-Forint-currency-conversion-page.html" target="_top">GBP/HUF</a> = <span -->
-<!--             class="valuedown">416.41072 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Indonesian-Rupiah-currency-conversion-page.html" target="_top">GBP/IDR</a> = <span -->
-<!--             class="valuedown">19330.82855 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Israeli-Sheqel-currency-conversion-page.html" target="_top">GBP/ILS</a> = <span -->
-<!--             class="valuedown">4.36693 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Rupees-currency-conversion-page.html" target="_top">GBP/INR</a> = <span -->
-<!--             class="valueup">100.80571 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Iraqi-Dinar-currency-conversion-page.html" target="_top">GBP/IQD</a> = <span -->
-<!--             class="valuedown">1976.9236 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Iran-Rial-currency-conversion-page.html" target="_top">GBP/IRR</a> = <span -->
-<!--             class="valuedown">57232.57213 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Icelandic-Krona-currency-conversion-page.html" target="_top">GBP/ISK</a> = <span -->
-<!--             class="valueup">175.78721 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Jamaican-Dollars-currency-conversion-page.html" target="_top">GBP/JMD</a> = <span -->
-<!--             class="valuedown">198.13043 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Jordanian-Dinars-currency-conversion-page.html" target="_top">GBP/JOD</a> = <span -->
-<!--             class="valuedown">0.96168 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Yen-currency-conversion-page.html" target="_top">GBP/JPY</a> = <span -->
-<!--             class="valueup">150.95734 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Kenyan-Shillings-currency-conversion-page.html" target="_top">GBP/KES</a> = <span -->
-<!--             class="valueup">150.01594 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Comoros-Franc-currency-conversion-page.html" target="_top">GBP/KMF</a> = <span -->
-<!--             class="valuedown">575.98821 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-South-Korean-Won-currency-conversion-page.html" target="_top">GBP/KRW</a> = <span -->
-<!--             class="valueup">1601.79687 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Kuwaiti-Dinar-currency-conversion-page.html" target="_top">GBP/KWD</a> = <span -->
-<!--             class="valueup">0.40898 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Cayman-Islands-Dollar-currency-conversion-page.html" target="_top">GBP/KYD</a> = <span -->
-<!--             class="valuedown">1.12845 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Kazakhstan-Tenge-currency-conversion-page.html" target="_top">GBP/KZT</a> = <span -->
-<!--             class="valuedown">577.77574 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Lebanese-Pounds-currency-conversion-page.html" target="_top">GBP/LBP</a> = <span -->
-<!--             class="valuedown">2046.98972 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Sri-Lankan-Rupees-currency-conversion-page.html" target="_top">GBP/LKR</a> = <span -->
-<!--             class="valuedown">270.47393 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Lesotho-Loti-currency-conversion-page.html" target="_top">GBP/LSL</a> = <span -->
-<!--             class="valuedown">20.35869 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Moroccan-Dirhams-currency-conversion-page.html" target="_top">GBP/MAD</a> = <span -->
-<!--             class="valuedown">12.26522 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Moldovan-Leu-currency-conversion-page.html" target="_top">GBP/MDL</a> = <span -->
-<!--             class="valueup">23.81302 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Macedonian-Denar-currency-conversion-page.html" target="_top">GBP/MKD</a> = <span -->
-<!--             class="valuedown">72.05764 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Mongolian-Tugrik-currency-conversion-page.html" target="_top">GBP/MNT</a> = <span -->
-<!--             class="valuedown">3861.70849 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Macau-Pataca-currency-conversion-page.html" target="_top">GBP/MOP</a> = <span -->
-<!--             class="valuedown">10.85843 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Mauritania-Ougulya-currency-conversion-page.html" target="_top">GBP/MRO</a> = <span -->
-<!--             class="valuedown">484.22843 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Mauritius-Rupee-currency-conversion-page.html" target="_top">GBP/MUR</a> = <span -->
-<!--             class="valueup">57.99893 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Maldives-Rufiyaa-currency-conversion-page.html" target="_top">GBP/MVR</a> = <span -->
-<!--             class="valuedown">20.95611 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Malawi-Kwacha-currency-conversion-page.html" target="_top">GBP/MWK</a> = <span -->
-<!--             class="valuedown">1104.07171 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Mexican-Pesos-currency-conversion-page.html" target="_top">GBP/MXN</a> = <span -->
-<!--             class="valueup">27.88104 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Malaysian-Ringgit-currency-conversion-page.html" target="_top">GBP/MYR</a> = <span -->
-<!--             class="valuedown">5.66154 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Namibian-Dollars-currency-conversion-page.html" target="_top">GBP/NAD</a> = <span -->
-<!--             class="valuedown">20.52207 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Nigerian-Naira-currency-conversion-page.html" target="_top">GBP/NGN</a> = <span -->
-<!--             class="valuedown">557.20205 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Nicaragua-Cordoba-currency-conversion-page.html" target="_top">GBP/NIO</a> = <span -->
-<!--             class="valuedown">47.54031 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Norwegian-Krone-currency-conversion-page.html" target="_top">GBP/NOK</a> = <span -->
-<!--             class="valuedown">11.68101 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Nepalese-Rupees-currency-conversion-page.html" target="_top">GBP/NPR</a> = <span -->
-<!--             class="valuedown">160.60825 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-New-Zealand-Dollars-currency-conversion-page.html" target="_top">GBP/NZD</a> = <span -->
-<!--             class="valuedown">1.95067 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Omani-Rial-currency-conversion-page.html" target="_top">GBP/OMR</a> = <span -->
-<!--             class="valuedown">0.52227 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Panamanian-Balboa-currency-conversion-page.html" target="_top">GBP/PAB</a> = <span -->
-<!--             class="valuedown">1.35638 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Peruvian-Nuevo-Sol-currency-conversion-page.html" target="_top">GBP/PEN</a> = <span -->
-<!--             class="valuedown">5.59831 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Papua-New-Guinea-Kina-currency-conversion-page.html" target="_top">GBP/PGK</a> = <span -->
-<!--             class="valuedown">4.75368 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Philippine-Pesos-currency-conversion-page.html" target="_top">GBP/PHP</a> = <span -->
-<!--             class="valuedown">68.88051 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Pakistani-Rupees-currency-conversion-page.html" target="_top">GBP/PKR</a> = <span -->
-<!--             class="valuedown">231.13745 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Polish-Zloty-currency-conversion-page.html" target="_top">GBP/PLN</a> = <span -->
-<!--             class="valuedown">5.33834 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Paraguayan-Guarani-currency-conversion-page.html" target="_top">GBP/PYG</a> = <span -->
-<!--             class="valuedown">9351.39277 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Qatari-Riyal-currency-conversion-page.html" target="_top">GBP/QAR</a> = <span -->
-<!--             class="valuedown">4.93014 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Romanian-Leu-currency-conversion-page.html" target="_top">GBP/RON</a> = <span -->
-<!--             class="valuedown">5.77846 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Russian-Roubles-currency-conversion-page.html" target="_top">GBP/RUB</a> = <span -->
-<!--             class="valueup">98.92669 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Rwanda-Franc-currency-conversion-page.html" target="_top">GBP/RWF</a> = <span -->
-<!--             class="valueup">1376.01897 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Saudi-Riyal-currency-conversion-page.html" target="_top">GBP/SAR</a> = <span -->
-<!--             class="valuedown">5.0872 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Solomon-Islands-Dollar-currency-conversion-page.html" target="_top">GBP/SBD</a> = <span -->
-<!--             class="valuedown">10.93421 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Seychelles-Rupee-currency-conversion-page.html" target="_top">GBP/SCR</a> = <span -->
-<!--             class="valuedown">18.07864 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Swedish-Krona-currency-conversion-page.html" target="_top">GBP/SEK</a> = <span -->
-<!--             class="valuedown">11.84825 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Singapore-Dollars-currency-conversion-page.html" target="_top">GBP/SGD</a> = <span -->
-<!--             class="valueup">1.84241 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Sierra-Leone-Leone-currency-conversion-page.html" target="_top">GBP/SLL</a> = <span -->
-<!--             class="valuedown">14347.61376 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-El-Salvador-Colon-currency-conversion-page.html" target="_top">GBP/SVC</a> = <span -->
-<!--             class="valuedown">11.848 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Swaziland-Lilageni-currency-conversion-page.html" target="_top">GBP/SZL</a> = <span -->
-<!--             class="valuedown">20.34311 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Baht-currency-conversion-page.html" target="_top">GBP/THB</a> = <span -->
-<!--             class="valueup">45.82539 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Tunisian-Dinar-currency-conversion-page.html" target="_top">GBP/TND</a> = <span -->
-<!--             class="valuedown">3.84195 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Tonga-Paanga-currency-conversion-page.html" target="_top">GBP/TOP</a> = <span -->
-<!--             class="valuedown">3.07478 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Lira-currency-conversion-page.html" target="_top">GBP/TRY</a> = <span -->
-<!--             class="valueup">12.03817 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Trinidad-Tobago-Dollar-currency-conversion-page.html" target="_top">GBP/TTD</a> = <span -->
-<!--             class="valuedown">9.19772 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Taiwan-Dollar-currency-conversion-page.html" target="_top">GBP/TWD</a> = <span -->
-<!--             class="valueup">37.81731 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Tanzanian-Shilling-currency-conversion-page.html" target="_top">GBP/TZS</a> = <span -->
-<!--             class="valueup">3130.5315 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Ukraine-Hryvnia-currency-conversion-page.html" target="_top">GBP/UAH</a> = <span -->
-<!--             class="valuedown">36.0548 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Ugandan-Shilling-currency-conversion-page.html" target="_top">GBP/UGX</a> = <span -->
-<!--             class="valuedown">4793.34523 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Dollars-currency-conversion-page.html" target="_top">GBP/USD</a> = <span -->
-<!--             class="valuedown">1.35687 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Uruguayan-New-Peso-currency-conversion-page.html" target="_top">GBP/UYU</a> = <span -->
-<!--             class="valueup">58.2717 ▲</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Vanuatu-Vatu-currency-conversion-page.html" target="_top">GBP/VUV</a> = <span -->
-<!--             class="valuedown">152.52371 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Samoa-Tala-currency-conversion-page.html" target="_top">GBP/WST</a> = <span -->
-<!--             class="valuedown">3.49197 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Central-African-CFA-Francs-currency-conversion-page.html" target="_top">GBP/XAF</a> = <span -->
-<!--             class="valuedown">766.18196 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-East-Caribbean-Dollars-currency-conversion-page.html" target="_top">GBP/XCD</a> = <span -->
-<!--             class="valuedown">3.66569 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-West-African-CFA-Francs-currency-conversion-page.html" target="_top">GBP/XOF</a> = <span -->
-<!--             class="valuedown">766.18196 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Pacific-Franc-currency-conversion-page.html" target="_top">GBP/XPF</a> = <span -->
-<!--             class="valuedown">139.38388 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-Yemen-Riyal-currency-conversion-page.html" target="_top">GBP/YER</a> = <span -->
-<!--             class="valuedown">339.43479 ▼</span></span><span class="quote"><a -->
-<!--             href="/Pounds-to-South-African-Rands-currency-conversion-page.html" target="_top">GBP/ZAR</a> = <span -->
-<!--             class="valueup">20.28581 ▲</span></span> -->
-
+    <div class="container-fluid home-banner">
+        <h1 class="top-heading-home">LOREM IPSUM <span>LOREM IPSUM</span> <br> LOREM IPSUM</h1>
       </div>
+
+      <div class="col-sm-12  KSE-div">
+        <div class="KSE-div2">
+            <div class="container">
+
+                <div class="col-sm-12 padding-zero">
+                    <marquee onmouseover="this.stop();" onmouseout="this.start();" class="marquee-padding">
+                        <div class="rates">
+<span class="symbolName">UNITY</span>&nbsp;<span class="symbolRate">29.54</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.01</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">BYCO</span>&nbsp;<span class="symbolRate">7.1</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.02</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">ASL</span>&nbsp;<span class="symbolRate">17.62</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">TRG</span>&nbsp;<span class="symbolRate">124.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -2.76</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">ANL</span>&nbsp;<span class="symbolRate">15.45</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PIBTL</span>&nbsp;<span class="symbolRate">8.06</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.01</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">ISL</span>&nbsp;<span class="symbolRate">77.02</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 2.72</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">BAFL</span>&nbsp;<span class="symbolRate">36.7</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.05</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">BOP</span>&nbsp;<span class="symbolRate">8.35</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.03</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">KEL</span>&nbsp;<span class="symbolRate">3.39</span>&nbsp;<span class="changeBlue">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/bluearrow.png"> 0.0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">EPCL</span>&nbsp;<span class="symbolRate">62.45</span>&nbsp;<span class="changeBlue">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/bluearrow.png"> 0.0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">AVN</span>&nbsp;<span class="symbolRate">111.9</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -1.47</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MLCF</span>&nbsp;<span class="symbolRate">34.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">LOTCHEM</span>&nbsp;<span class="symbolRate">15.56</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PIOC</span>&nbsp;<span class="symbolRate">82.25</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -3.86</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">INIL</span>&nbsp;<span class="symbolRate">169.5</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 10.29</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MUGHAL</span>&nbsp;<span class="symbolRate">83.8</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.66</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">EFERT</span>&nbsp;<span class="symbolRate">70.95</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.82</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MCB</span>&nbsp;<span class="symbolRate">159.5</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.47</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">DGKC</span>&nbsp;<span class="symbolRate">80.4</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.66</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">OGDC</span>&nbsp;<span class="symbolRate">83.8</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -1.17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PAEL</span>&nbsp;<span class="symbolRate">26.05</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.06</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">KAPCO</span>&nbsp;<span class="symbolRate">27.3</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.26</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">FCCL</span>&nbsp;<span class="symbolRate">17.6</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.35</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">AKBL</span>&nbsp;<span class="symbolRate">22.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.91</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">JSCL</span>&nbsp;<span class="symbolRate">19.25</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.05</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">FFBL</span>&nbsp;<span class="symbolRate">22.75</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">NCL</span>&nbsp;<span class="symbolRate">45.5</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.79</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">SEARL</span>&nbsp;<span class="symbolRate">228.92</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PSMC</span>&nbsp;<span class="symbolRate">205.5</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -9.21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </marquee>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- second section -->
-  <div class="container cal-container">
+      <!-- second section -->
+      <div class="container table-container">
+       <div class="row">
+         <div class="col-md-4 text-center bx-down">
+          <div class="bx-a">
+            <div class="row t-head">
+             <div class="col-md-2">
+              <img src="{% static 'images/market-icon.png' %}" class="tb-icon text-left">
+             </div>
+             <div class="col-md-7 title-text">
+              <h3>MARKET SUMMARY</h3>
+             </div>
+             <div class="col-md-3">
+              <button type="button" class="btn btn-secondary view-all-btn">View all</button>
+             </div>
+            </div>
+            <div class="row">
+              <div class="table-responsive-sm">
+                <table class="table">
+                  <thead>
+                    <tr class="heading-row">
+                      <th scope="col"  class="text-left">SCRIP</th>
+                      <th scope="col">PRICE</th>
+                      <th scope="col">HIGH</th>
+                      <th scope="col">LOW</th>
+                      <th scope="col">CHANGE</th>
+                      <th scope="col">VOLUME</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-left">KEL</th>
+                      <td>4</td>
+                      <td>4.31</td>
+                      <td>3.1</td>
+                      <td class="green">.69</td>
+                      <td class="text-right">32,484,500</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-left">BYCO</th>
+                      <td>8.18</td>
+                      <td>8.33</td>
+                      <td>7.48</td>
+                      <td class="green">.45</td>
+                      <td class="text-right">29,767,000</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-left">ANL</th>
+                      <td>8.18</td>
+                      <td>8.33</td>
+                      <td>7.48</td>
+                      <td class="red">.45</td>
+                      <td class="text-right">29,767,000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         </div>
+         <div class="col-md-4 text-center">
+          <div class="bx-a">
+            <div class="row t-head">
+             <div class="col-md-2">
+              <img src="{% static 'images/market-icon.png' %}" class="tb-icon text-left">
+             </div>
+             <div class="col-md-7 title-text">
+              <h3>MARKET SUMMARY</h3>
+             </div>
+             <div class="col-md-3">
+              <!-- <button type="button" class="btn btn-secondary view-all-btn">View all</button> -->
+             </div>
+            </div>
+            <div class="row t-head2">
+              <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle my-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Right-aligned menu
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <button class="dropdown-item" type="button">Action</button>
+                  <button class="dropdown-item" type="button">Another action</button>
+                  <button class="dropdown-item" type="button">Something else here</button>
+                </div>
+              </div>
+            </div>
 
-  </div>
+            <div class="row graph">
+              <h5>Analytic area</h5>
+            </div>
+
+            <div class="row">
+              <div class="table-responsive-sm">
+                <table class="table without-border">
+                  <thead>
+                    <tr class="heading-row">
+                      <th scope="col"  class="text-left">SCRIP</th>
+                      <th scope="col">PRICE</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-left">KEL</th>
+                      <td>4</td>
+
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-left">BYCO</th>
+                      <td>8.18</td>
+
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-left">ANL</th>
+                      <td>8.18</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         </div>
+         <div class="col-md-4 text-center bx-down">
+          <div class="bx-a">
+            <div class="row p-4">
+             <div class="col">
+               Request
+             </div>
+             <div class="col">
+              <button type="button" class="btn btn-success">Success</button>
+             </div>
+            </div>
+
+            <div class="row pb-4">
+              <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle my-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Right-aligned menu
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <button class="dropdown-item" type="button">Action</button>
+                  <button class="dropdown-item" type="button">Another action</button>
+                  <button class="dropdown-item" type="button">Something else here</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="table-responsive-sm">
+                <table class="table">
+                  <thead>
+                    <tr class="heading-row">
+                      <th scope="col"  class="text-left">SCRIP</th>
+                      <th scope="col">PRICE</th>
+                      <th scope="col">HIGH</th>
+                      <th scope="col">LOW</th>
+                      <th scope="col">CHANGE</th>
+                      <th scope="col">VOLUME</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" class="text-left">KEL</th>
+                      <td>4</td>
+                      <td>4.31</td>
+                      <td>3.1</td>
+                      <td class="green"><span>&#9650;</span> .69</td>
+                      <td class="text-right">32,484,500</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-left">BYCO</th>
+                      <td>8.18</td>
+                      <td>8.33</td>
+                      <td>7.48</td>
+                      <td class="green"><span>&#9650;</span>.45</td>
+                      <td class="text-right">29,767,000</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="text-left">ANL</th>
+                      <td>8.18</td>
+                      <td>8.33</td>
+                      <td>7.48</td>
+                      <td class="red"><span>&#9660; </span>.45</td>
+                      <td class="text-right">29,767,000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         </div>
+       </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
 
 {% endblock %}
