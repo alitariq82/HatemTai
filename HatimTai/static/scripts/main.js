@@ -33,20 +33,56 @@ $(document).ready(function() {
         });
 
     });
+    let allEvents = []
+     $.ajax({
+                url: '/add_event/',
+                method: 'GET',
+                success : function(response){
+
+                    for (event of response.data){
+                        eventDataObject = {
+                            allDay: false,
+                            className: 'important'
+                        }
+                        eventDataObject['title'] = event['event_title']
+                        start = new Date(event['start_date'])
+                        eventDataObject['start'] = start
+                        current = new Date()
+                        eventDataObject['end'] = new Date(event['end_date'])
+                         if ( (start.getDate() === current.getDate()) && (start.getMonth() === current.getMonth()) && (start.getYear() === current.getYear())){
+                             eventDataObject['className'] = 'success';
+                        }
+                        eventDataObject['id'] = event['event_id']
+                        allEvents.push(eventDataObject)
+                    }
+                    getCalender(allEvents)
+                },
+                error: function(){
+                    alert('Failed to add the event')
+                    allEvents([])
+                }
+            })
 
 
     /* initialize the calendar
     -----------------------------------------------------------------*/
 
+
+
+});
+
+function getCalender(allEvents){
     var calendar =  $('#calendar').fullCalendar({
         header: {
             left: 'title',
             center: 'agendaDay,agendaWeek,month',
             right: 'prev,next today'
         },
+        events: '/add_event/',
         editable: true,
         firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
         selectable: true,
+        selectHelper: true,
         defaultView: 'month',
 
         axisFormat: 'h:mm',
@@ -63,15 +99,91 @@ $(document).ready(function() {
         },
         allDaySlot: false,
         selectHelper: true,
+
         select: function(start, end, allDay) {
-            let date = start
-            $('#create_date').val(date)
+            var title = prompt('Event Title:');
+            calendar.fullCalendar('renderEvent',
+                {
+                    title: title,
+                    start: start,
+                    end: end,
+                    allDay: allDay
+                },
+                true // make the event "stick"
+            );
+            calendar.fullCalendar('unselect');
+            if (title) {
+                $.ajax({
+                url: '/add_event/',
+                method: 'POST',
+                data: {'title': title, 'start': start, 'end': end},
+                success : function(response){
+
+                    allEvents = []
+                    alert('Event Added Successfully')
+                    for (event of response.data){
+                        eventObject = {
+                            allDay: false,
+                            className: 'important'
+                        }
+                        eventObject['title'] = event['event_title']
+                        start = new Date(event['start_date'])
+                        eventObject['start'] = start
+                        current = new Date()
+                        if ( (start.getDate() === current.getDate()) && (start.getMonth() === current.getMonth()) && (start.getYear() === current.getYear())){
+                             eventObject['className'] = 'success';
+                        }
+                        eventObject['end'] = new Date(event['end_date'])
+                        eventObject['id'] = event['event_id']
+                        allEvents.push(eventObject)
+                    }
+                    $('#calendar').fullCalendar('removeEvents')
+                    $('#calendar').fullCalendar('addEventSource', allEvents);
+                    $('#calendar').fullCalendar('rerenderEvents' );
+                },
+                error: function(){
+                    alert('Failed to add the event')
+                }
+            })
+            }
+
+
+
+        },
+        droppable: true, // this allows things to be dropped onto the calendar !!!
+        drop: function(date, allDay) { // this function is called when something is dropped
+
+            // retrieve the dropped element's stored Event Object
+            var originalEventObject = $(this).data('eventObject');
+
+            // we need to copy it, so that multiple events don't have a reference to the same object
+            var copiedEventObject = $.extend({}, originalEventObject);
+
+            // assign it the date that was reported
+            copiedEventObject.start = date;
+            copiedEventObject.allDay = allDay;
+
+            // render the event on the calendar
+            // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+            $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+            // is the "remove after drop" checkbox checked?
+            if ($('#drop-remove').is(':checked')) {
+                // if so, remove the element from the "Draggable Events" list
+                $(this).remove();
+            }
+
+        },
+        events: allEvents,
+        eventClick: function(event){
+            let event_id = event.id
             let user_type = $('#user_type').val()
-            if ($.trim(date)){
+            $('#event_id').val(event_id)
+            if (event_id){
                 $.ajax({
                     url: '/get_stocks_detail/',
                     method: 'POST',
-                    data: {date: date},
+                    data: {'event_id': event_id},
                     success: function(response){
                        data = response.data
                        if(Object.keys(data).length > 0){
@@ -110,79 +222,53 @@ $(document).ready(function() {
                     }
                 })
             }
-        },
-        droppable: true, // this allows things to be dropped onto the calendar !!!
-        drop: function(date, allDay) { // this function is called when something is dropped
+        }
 
-            // retrieve the dropped element's stored Event Object
-            var originalEventObject = $(this).data('eventObject');
-
-            // we need to copy it, so that multiple events don't have a reference to the same object
-            var copiedEventObject = $.extend({}, originalEventObject);
-
-            // assign it the date that was reported
-            copiedEventObject.start = date;
-            copiedEventObject.allDay = allDay;
-
-            // render the event on the calendar
-            // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-            $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-            // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
-                $(this).remove();
-            }
-
-        },
-
-        events: [
-            {
-                title: 'Stock Name 1',
-                start: new Date(y, m, 1),
-                className: 'success'
-            },
-            {
-                id: 999,
-                title: 'Stock Name 2',
-                start: new Date(y, m, d-3, 16, 0),
-                allDay: false,
-                className: 'important'
-            },
-            {
-                id: 999,
-                title: 'Stock Name 3',
-                start: new Date(y, m, d+4, 16, 0),
-                allDay: false,
-                className: 'important'
-            },
-            {
-                title: 'Stock Name 4',
-                start: new Date(y, m, d, 10, 30),
-                allDay: false,
-                className: 'important'
-            },
-            {
-                title: 'Stock Name 5',
-                start: new Date(y, m, d, 12, 0),
-                end: new Date(y, m, d, 14, 0),
-                allDay: false,
-                className: 'important'
-            },
-            {
-                title: 'Stock Name 6',
-                start: new Date(y, m, d+1, 19, 0),
-                end: new Date(y, m, d+1, 22, 30),
-                allDay: false,
-            },
-            {
-                title: 'Stock Name 7',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 28),
-               className: 'success'
-            }
-        ],
+//        events: [
+//            {
+//                title: 'Stock Name 1',
+//                start: new Date(y, m, 1),
+//                className: 'success'
+//            },
+//            {
+//                id: 999,
+//                title: 'Stock Name 2',
+//                start: new Date(y, m, d-3, 16, 0),
+//                allDay: false,
+//                className: 'important'
+//            },
+//            {
+//                id: 999,
+//                title: 'Stock Name 3',
+//                start: new Date(y, m, d+4, 16, 0),
+//                allDay: false,
+//                className: 'important'
+//            },
+//            {
+//                title: 'Stock Name 4',
+//                start: new Date(y, m, d, 10, 30),
+//                allDay: false,
+//                className: 'important'
+//            },
+//            {
+//                title: 'Stock Name 5',
+//                start: new Date(y, m, d, 12, 0),
+//                end: new Date(y, m, d, 14, 0),
+//                allDay: false,
+//                className: 'important'
+//            },
+//            {
+//                title: 'Stock Name 6',
+//                start: new Date(y, m, d+1, 19, 0),
+//                end: new Date(y, m, d+1, 22, 30),
+//                allDay: false,
+//            },
+//            {
+//                title: 'Stock Name 7',
+//                start: new Date(y, m, 28),
+//                end: new Date(y, m, 28),
+//               className: 'success'
+//            }
+//        ],
     });
-
-
-});
+}

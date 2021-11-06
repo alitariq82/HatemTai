@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import auth
 from .forms import UserForm as UserForm
 from django.contrib import messages
-from .models import User as User, Stocks as Stocks, ForexData
+from .models import User as User, Stocks as Stocks, ForexData, Event
 from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -14,6 +14,13 @@ from datetime import datetime
 from forex_python.converter import CurrencyRates
 import io
 import csv
+
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 
 class Index(View):
@@ -49,6 +56,10 @@ class Login(View):
         password = request.POST.get('password')
         user = auth.authenticate(username=user_name, password=password)
         if user:
+            current_user = User.objects.get(username=user_name)
+            if not current_user.is_active:
+                messages.error(request, "Account is not Activated. Please activate your account first")
+                return redirect('/accounts/login')
             auth.login(request, user)
             return redirect('/')
         else:
@@ -85,9 +96,29 @@ class Register(View):
                 _user.email = email_id
                 _user.set_password(password)
                 _user.save()
+
+                # region activation email
+                _user.is_active = False
+                _user.save()
+                current_site = get_current_site(request)
+                mail_subject = 'Activate your account.'
+                message = render_to_string('acc_active_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user),
+                })
+                to_email = _user.email
+                email = EmailMessage(
+                    mail_subject, message, to=[to_email]
+                )
+                email.send()
+                # # endregion
             login(request, user)
-            messages.success(request, "Registration successful. Please login with your credentials")
-            return redirect("/accounts/login/")
+            return HttpResponse('Registration has been successful. We have sent an activation link to'
+                                ' your registered email address. Kindly activate your account by clicking on the link')
+            # messages.success(request, "Registration successful. Please login with your credentials")
+            # return redirect("/accounts/login/")
         messages.error(request, "User already exists. Please try with another email address")
         return redirect("/register")
 
@@ -96,12 +127,11 @@ class Register(View):
 class StocksDetail(View):
     def post(self, request):
         try:
-            date = request.POST.get('date')
-            if date:
-                date_processed = process_date(date)
-                stocks_detail = Stocks.objects.filter(created_date=date_processed).last()
+            event_id = request.POST.get('event_id')
+            if event_id:
                 data = {}
-                if stocks_detail:
+                if Stocks.objects.filter(event_id_id=event_id).exists():
+                    stocks_detail = Stocks.objects.get(event_id_id=event_id)
                     data['script_name'] = stocks_detail.script_name
                     data['target_price'] = stocks_detail.target_price
                     data['stop_loss'] = stocks_detail.stop_loss
@@ -119,13 +149,22 @@ class StocksData(View):
             stop_loss = request.POST.get('stop_loss')
             holding_period = request.POST.get('holding_period')
             user_id = request.user
-            date = request.POST.get('created_date')
-            if date:
-                date_processed = process_date(date)
-            stock_detail = Stocks(script_name=script_name, target_price=target_price, stop_loss=stop_loss,
-                                  holding_period=holding_period,created_date=date_processed, user_id=user_id)
-            stock_detail.save()
-            messages.success(request, "Stock has been created successfully")
+            event_id = request.POST.get('event_id')
+            if Stocks.objects.filter(event_id_id=event_id).exists():
+                stock_data = Stocks.objects.get(user_id=user_id, event_id_id=event_id)
+                stock_data.script_name = script_name
+                stock_data.target_price = target_price
+                stock_data.stop_loss = stop_loss
+                stock_data.holding_period = holding_period
+                stock_data.created_date = datetime.now()
+                stock_data.save()
+
+            else:
+                stock_detail = Stocks(script_name=script_name, target_price=target_price, stop_loss=stop_loss,
+                                      holding_period=holding_period, created_date=datetime.now(), user_id=user_id,
+                                      event_id_id=event_id)
+                stock_detail.save()
+            messages.success(request, "Stock has been updated successfully")
             return redirect('/market_summary/')
         except Exception as e:
             messages.error(request, "Failed to create stock, please try again")
@@ -205,8 +244,45 @@ class ForexFileUpload(View):
             return redirect('/forex_file_upload/')
 
 
+class AddEvents(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(AddEvents, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        title = request.POST.get('title')
+        start = request.POST.get('start')
+        start = datetime.strptime(start.split('GMT')[0].strip(), "%a %b %d %Y %H:%M:%S")
+        end = request.POST.get('end')
+        end = datetime.strptime(end.split('GMT')[0].strip(), "%a %b %d %Y %H:%M:%S")
+        event = Event(event_title=title, start_date=start, end_date=end)
+        event.save()
+        event_id = event.event_id
+        all_events = list(Event.objects.all().order_by('event_id').values())
+        return JsonResponse({'data': all_events, 'event_id': event_id, 'success': True, 'status': 200})
+
+    def get(self, request):
+        all_events = list(Event.objects.all().order_by('event_id').values())
+        return JsonResponse({'data': all_events, 'success': True, 'status': 200})
+
+
 def process_date(date):
     date_splited = date.split('GMT')[0]
     cleaned_date = date_splited.replace('00:00:00', '').strip()
     date = datetime.strptime(cleaned_date, "%a %b %d %Y")
     return date
+
+
+def activate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None:
+        user.is_active = True
+        user.save()
+        messages.success(request, "Your account has been Activated successfully. Please login with your credentials")
+        return redirect('/accounts/login')
+    else:
+        return HttpResponse('Activation link is invalid!')

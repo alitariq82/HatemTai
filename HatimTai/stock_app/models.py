@@ -34,6 +34,7 @@ class Stocks(models.Model):
     holding_period = models.IntegerField(blank=False, default=0)
     created_date = models.DateTimeField(blank=False)
     user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='user_id')
+    event_id = models.ForeignKey('Event', on_delete=models.CASCADE, db_column='event_id', null=True)
 
     class Meta:
         db_table = "Stocks"
@@ -48,3 +49,13 @@ class ForexData(models.Model):
 
     class Meta:
         db_table = "ForexData"
+
+
+class Event(models.Model):
+    event_id = models.AutoField(primary_key=True)
+    event_title = models.CharField(max_length=5000, null=None, blank=False)
+    start_date = models.DateTimeField(blank=False)
+    end_date = models.DateTimeField(blank=False)
+
+    class Meta:
+        db_table = "Event"

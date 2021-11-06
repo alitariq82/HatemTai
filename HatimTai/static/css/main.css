@@ -23580,3 +23580,8 @@ body {
 .forexFile{
     background-color: #172236;
 }
+
+.red_star:after{
+    content:" *";
+    color:red;
+}

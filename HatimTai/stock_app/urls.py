@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', stock_views.Index.as_view()),
     path('hit_forex/', stock_views.HitForexApi.as_view()),
+    path('add_event/', stock_views.AddEvents.as_view()),
     path('forex_file_upload/', stock_views.ForexFileUpload.as_view()),
     path('market_summary/', stock_views.MarketSummary.as_view()),
     path('users/', stock_views.Users.as_view()),
@@ -17,4 +18,5 @@ urlpatterns = [
     path('reset_password_done/', auth_views.PasswordResetDoneView.as_view(), name="reset_password_done"),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="reset_password_confirm"),
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(), name="reset_password_complete"),
+    path('activate/<uidb64>/<token>/', stock_views.activate, name='activate'),
 ]

@@ -8,7 +8,7 @@
       <form action="/register/" method="post">
         {% csrf_token %}
         <div class="mb-3">
-          <label for="first_name" class="form-label">First Name</label>
+          <label for="first_name" class="form-label red_star">First Name</label>
           <input type="text" class="form-control" value="" name="first_name" id="first_name"
                  aria-describedby="emailHelp" required>
         </div>
@@ -17,7 +17,7 @@
           <input type="text" class="form-control"  value="" name="last_name" id="last_name" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-          <label for="username" class="form-label">Email Address</label>
+          <label for="username" class="form-label red_star">Email Address</label>
           <input type="email" class="form-control" name="username" id="username" aria-describedby="emailHelp" required>
         </div>
         <div class="mb-3">
@@ -25,17 +25,17 @@
           <input type="text" value="" class="form-control" name="phone_number" id="phone_number" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-          <label for="CNIC" class="form-label">CNIC</label>
+          <label for="CNIC" class="form-label red_star">CNIC</label>
           <input type="text" class="form-control" name="CNIC" id="CNIC" aria-describedby="emailHelp" required>
         </div>
         <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label red_star">Password</label>
           <input type="password" name="password" class="form-control" id="password" required>
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">I agree to the Terms & Conditions</label>
-        </div>
+<!--        <div class="mb-3 form-check">-->
+<!--          <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--          <label class="form-check-label" for="exampleCheck1">I agree to the Terms & Conditions</label>-->
+<!--        </div>-->
         <button type="submit" class="btn btn-primary w-100 theme-btn-colors">Create Account</button>
       </form>
       {% if messages %}
