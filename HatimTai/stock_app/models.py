@@ -44,7 +44,8 @@ class ForexData(models.Model):
     forex_id = models.AutoField(primary_key=True)
     currency_code = models.CharField(max_length=5, unique=True, null=None, blank=False)
     currency_value = models.CharField(blank=False, null=None, max_length=250)
-    currency_arrow = models.CharField(blank=False, max_length=5, default='UP')
+    rate_diff = models.CharField(blank=False, null=None, max_length=250, default='0.0')
+    currency_arrow = models.CharField(blank=False, max_length=10, default='DEFAULT')
     user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='user_id')
 
     class Meta:

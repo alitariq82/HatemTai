@@ -18,7 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
-    messages.ERROR: 'alert-danger'
+    messages.ERROR: 'alert-danger',
+    messages.WARNING: 'alert-warning'
 }
 
 

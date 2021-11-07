@@ -115,10 +115,10 @@ class Register(View):
                 email.send()
                 # # endregion
             login(request, user)
-            return HttpResponse('Registration has been successful. We have sent an activation link to'
-                                ' your registered email address. Kindly activate your account by clicking on the link')
-            # messages.success(request, "Registration successful. Please login with your credentials")
-            # return redirect("/accounts/login/")
+            messages.warning(request, "Registration has been successful. We have sent an activation link to "
+                                      "your registered email address. Kindly activate your account by clicking on "
+                                      "the link ")
+            return redirect("/accounts/login/")
         messages.error(request, "User already exists. Please try with another email address")
         return redirect("/register")
 
@@ -222,14 +222,17 @@ class ForexFileUpload(View):
                 currency_code = column[0]
                 currency_new_value = column[1]
                 if currency_new_value and currency_code:
-                    arrow_direction = 'UP'
                     if ForexData.objects.filter(currency_code=currency_code).exists():
                         forex = ForexData.objects.get(currency_code=currency_code)
                         currency_old_value = forex.currency_value
+                        currency_dif = float(currency_new_value) - float(currency_old_value)
+                        forex.rate_diff = str(currency_dif)
                         if float(currency_new_value) < float(currency_old_value):
                             arrow_direction = 'DOWN'
+                        elif float(currency_new_value) > float(currency_old_value):
+                            arrow_direction = 'UP'
                         else:
-                            arrow_direction = forex.currency_arrow
+                            arrow_direction = 'DEFAULT'
                         forex.currency_arrow = arrow_direction
                         forex.currency_value = currency_new_value
                         forex.save()

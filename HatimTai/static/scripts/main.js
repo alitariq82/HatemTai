@@ -101,7 +101,10 @@ function getCalender(allEvents){
         selectHelper: true,
 
         select: function(start, end, allDay) {
-
+            let user_type = $('#user_type').val()
+            if (user_type != 'Admin'){
+                return false;
+            }
             var eventsCount = 0;
             var date = moment(start).format("YYYY-MM-DD");
             $('#calendar').fullCalendar('clientEvents', function(event) {
@@ -118,17 +121,17 @@ function getCalender(allEvents){
                 return false;
             }
             var title = prompt('Event Title:');
-            calendar.fullCalendar('renderEvent',
-                {
-                    title: title,
-                    start: start,
-                    end: end,
-                    allDay: allDay
-                },
-                true // make the event "stick"
-            );
-            calendar.fullCalendar('unselect');
-            if (title) {
+             if (title) {
+                calendar.fullCalendar('renderEvent',
+                    {
+                        title: title,
+                        start: start,
+                        end: end,
+                        allDay: allDay
+                    },
+                    true // make the event "stick"
+                );
+                calendar.fullCalendar('unselect');
                 $.ajax({
                 url: '/add_event/',
                 method: 'POST',
