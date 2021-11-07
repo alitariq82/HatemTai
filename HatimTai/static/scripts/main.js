@@ -101,6 +101,22 @@ function getCalender(allEvents){
         selectHelper: true,
 
         select: function(start, end, allDay) {
+
+            var eventsCount = 0;
+            var date = moment(start).format("YYYY-MM-DD");
+            $('#calendar').fullCalendar('clientEvents', function(event) {
+                var start = moment(event.start).format("YYYY-MM-DD");
+                var end = moment(event.end).format("YYYY-MM-DD");
+                if(date == start)
+                {
+                    eventsCount++;
+                }
+            });
+            if (eventsCount > 2)
+            {
+                alert('You cannot add more than 3 events')
+                return false;
+            }
             var title = prompt('Event Title:');
             calendar.fullCalendar('renderEvent',
                 {
