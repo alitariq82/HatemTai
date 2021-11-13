@@ -60,6 +60,20 @@
               <div class="table-responsive-sm">
                 <table class="table">
                   <thead>
+<!--                  {% for crypt in crypto %}-->
+<!--                    <tr>-->
+<!--                      <th scope="row" class="text-left">{{crypt.name}}</th>-->
+<!--                      <td>{{crypt.quote.USD.price}}</td>-->
+<!--                      <td>4.31</td>-->
+<!--                      <td>3.1</td>-->
+<!--                        {% if crypt.quote.USD.volume_change_24h < 0%}-->
+<!--                            <td class="red">{{crypt.quote.USD.volume_change_24h}}</td>-->
+<!--                        {% else %}-->
+<!--                            <td class="green">{{crypt.quote.USD.volume_change_24h}}</td>-->
+<!--                        {% endif %}-->
+<!--                      <td class="text-right">{{crypt.quote.USD.volume_24h}}</td>-->
+<!--                    </tr>-->
+<!--                  {% endfor %}-->
                     <tr class="heading-row">
                       <th scope="col"  class="text-left">SCRIP</th>
                       <th scope="col">PRICE</th>
@@ -107,7 +121,7 @@
               <img src="{% static 'images/market-icon.png' %}" class="tb-icon text-left">
              </div>
              <div class="col-md-7 title-text">
-              <h3>MARKET SUMMARY</h3>
+              <h3>CRYPTO SUMMARY</h3>
              </div>
              <div class="col-md-3">
               <!-- <button type="button" class="btn btn-secondary view-all-btn">View all</button> -->
@@ -135,27 +149,29 @@
                 <table class="table without-border">
                   <thead>
                     <tr class="heading-row">
-                      <th scope="col"  class="text-left">SCRIP</th>
+                      <th scope="col"  class="text-left">CURRENCY</th>
                       <th scope="col">PRICE</th>
 
                     </tr>
                   </thead>
                   <tbody>
+                  {% for crypt in crypto %}
                     <tr>
-                      <th scope="row" class="text-left">KEL</th>
-                      <td>4</td>
+                      <th scope="row" class="text-left">{{crypt.name}}</th>
+                     <td>{{crypt.quote.USD.price}}</td>
 
                     </tr>
-                    <tr>
-                      <th scope="row" class="text-left">BYCO</th>
-                      <td>8.18</td>
+                  {% endfor %}
+<!--                    <tr>-->
+<!--                      <th scope="row" class="text-left">BYCO</th>-->
+<!--                      <td>8.18</td>-->
 
-                    </tr>
-                    <tr>
-                      <th scope="row" class="text-left">ANL</th>
-                      <td>8.18</td>
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <th scope="row" class="text-left">ANL</th>-->
+<!--                      <td>8.18</td>-->
 
-                    </tr>
+<!--                    </tr>-->
                   </tbody>
                 </table>
               </div>

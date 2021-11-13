@@ -45,10 +45,10 @@ $(document).ready(function() {
                             className: 'important'
                         }
                         eventDataObject['title'] = event['event_title']
-                        start = new Date(event['start_date'])
+                        start = new Date(event['start_date'].replace('Z',''))
                         eventDataObject['start'] = start
                         current = new Date()
-                        eventDataObject['end'] = new Date(event['end_date'])
+                        eventDataObject['end'] = new Date(event['end_date'].replace('Z',''))
                          if ( (start.getDate() === current.getDate()) && (start.getMonth() === current.getMonth()) && (start.getYear() === current.getYear())){
                              eventDataObject['className'] = 'success';
                         }
@@ -146,13 +146,13 @@ function getCalender(allEvents){
                             className: 'important'
                         }
                         eventObject['title'] = event['event_title']
-                        start = new Date(event['start_date'])
+                        start = new Date(event['start_date'].replace('Z',''))
                         eventObject['start'] = start
                         current = new Date()
                         if ( (start.getDate() === current.getDate()) && (start.getMonth() === current.getMonth()) && (start.getYear() === current.getYear())){
                              eventObject['className'] = 'success';
                         }
-                        eventObject['end'] = new Date(event['end_date'])
+                        eventObject['end'] = new Date(event['end_date'].replace('Z',''))
                         eventObject['id'] = event['event_id']
                         allEvents.push(eventObject)
                     }
@@ -241,7 +241,25 @@ function getCalender(allEvents){
                     }
                 })
             }
-        }
+        },
+//        editable: true,
+//        eventResize: function(event){
+//            let start  = moment(event.start).format("YYYY-MM-DD HH:mm:ss");
+//            let end = moment(event.end).format("YYYY-MM-DD HH:mm:ss");
+//            let title = event.title
+//            let id = event._id
+//            $.ajax({
+//                url: '/handle_time_data/',
+//                method: 'POST',
+//                data: {'start': start, 'end': end, 'event_id': event_id},
+//                success: function(){
+//                    calendar.fullCalendar('refetchEvents');
+//                },
+//                error: function(err){
+//                    console.log(err)
+//                }
+//            })
+//        },
 
 //        events: [
 //            {

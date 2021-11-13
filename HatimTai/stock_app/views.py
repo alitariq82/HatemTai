@@ -14,6 +14,8 @@ from datetime import datetime
 from forex_python.converter import CurrencyRates
 import io
 import csv
+from requests import Request, Session
+import json
 
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
@@ -27,8 +29,27 @@ class Index(View):
     def get(self, request):
         # <view logic>
         try:
+            # forex data from csv uploaded file
             forex = ForexData.objects.all()
-            return render(request, 'index.html', {'user': request.user, 'forex': forex})
+            # region crypto api
+            headers = {
+                'Accepts': 'application/json',
+                'X-CMC_PRO_API_KEY': 'fbca91fe-2eec-4978-815b-8d5cbdb5b2cd',
+            }
+            session = Session()
+            session.headers.update(headers)
+            url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
+            response = session.get(url)
+            crypto_data = json.loads(response.text).get('data')
+            # endregion
+
+            # region Forex from api
+            # c = CurrencyRates()
+            # rates = c.get_rates('GBP')
+            # for code, price in rates.items():
+            #     print('code:', code)
+            #     print('value: ', price)
+            return render(request, 'index.html', {'user': request.user, 'forex': forex, 'crypto': crypto_data})
         except Exception as e:
             return redirect('/')
 
@@ -265,7 +286,7 @@ class AddEvents(View):
         return JsonResponse({'data': all_events, 'event_id': event_id, 'success': True, 'status': 200})
 
     def get(self, request):
-        all_events = list(Event.objects.all().order_by('event_id').values())
+        all_events = list(Event.objects.all().order_by('-event_id').values())
         return JsonResponse({'data': all_events, 'success': True, 'status': 200})
 
 
@@ -289,3 +310,22 @@ def activate(request, uidb64, token):
         return redirect('/accounts/login')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class HandleTime(View):
+    def post(self, request):
+        try:
+            start = request.POST.get('start')
+            start = datetime.strptime(start.split('GMT')[0].strip(), "%a %b %d %Y %H:%M:%S")
+            end = request.POST.get('end')
+            end = datetime.strptime(end.split('GMT')[0].strip(), "%a %b %d %Y %H:%M:%S")
+            event_id = request.POST.get('event_id')
+            event = Event.get(event_id=event_id).update(start_date=start, end_date=end)
+            event_id = event.event_id
+            all_events = list(Event.objects.all().order_by('event_id').values())
+            return JsonResponse({'data': all_events, 'event_id': event_id, 'success': True, 'status': 200})
+        except Exception as e:
+            return redirect('/index/')
+
+
