@@ -16,6 +16,9 @@ from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
 MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.ERROR: 'alert-danger',
@@ -44,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stock_app'
+    'stock_app',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +59,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+# Tell Nginx or Server to look for static file in this directory
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Used to include additional directories for collectstatic to look for
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 ROOT_URLCONF = 'HatimTai.urls'
 
@@ -84,9 +94,9 @@ WSGI_APPLICATION = 'HatimTai.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hatemtai',
+        'NAME': 'hatem_db',
         'USER': 'zeeshan',
-        'PASSWORD': '1234',
+        'PASSWORD': 'zeeshan',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
