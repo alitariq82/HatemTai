@@ -1,0 +1,17 @@
+[
+{
+	"model": "stock_app.User",
+	"pk": 100,
+	"fields":{
+		"first_name": "Hatem",
+		"last_name": "Tai",
+		"email": "hatemtai@hatem.com",
+		"username": "hatemtai@hatem.com",
+		"password": "pbkdf2_sha256$260000$bJeORryWHk4SEXXvulSZj7$7OPH5lAU9Pq5EXMUkjl71EnkzELz68m/weLMu28F/JQ=",
+		"CNIC": "14032-12348735-1",
+		"is_superuser": true,
+		"is_active": true,
+		"role": "Admin"
+	}
+}
+]
