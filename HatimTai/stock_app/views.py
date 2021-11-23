@@ -85,6 +85,16 @@ class Login(View):
                 return redirect('/accounts/login')
             auth.login(request, user)
             return redirect('/market_summary/')
+        elif User.objects.get(phone_number=user_name):
+            user_name = User.objects.get(phone_number=user_name).username
+            user = auth.authenticate(username=user_name, password=password)
+            if user:
+                current_user = User.objects.get(username=user_name)
+                if not current_user.is_active:
+                    messages.error(request, "Account is not Activated. Please activate your account first")
+                    return redirect('/accounts/login')
+                auth.login(request, user)
+                return redirect('/market_summary/')
         else:
             messages.error(request, "Either email or password is incorrect")
             return redirect('/accounts/login')
@@ -142,7 +152,7 @@ class Register(View):
                                       "your registered email address. Kindly activate your account by clicking on "
                                       "the link ")
             return redirect("/accounts/login/")
-        messages.error(request, "User already exists. Please try with another email address")
+        messages.error(request, "User already exists with these credentials. Please try with another email address")
         return redirect("/register")
 
 
@@ -237,12 +247,14 @@ class ForexFileUpload(View):
 
     def post(self, request):
         try:
+            current_stocks_symbols = []
             csv_file = request.FILES['forexFile']
             data_set = csv_file.read().decode('latin-1')
             io_string = io.StringIO(data_set)
             next(io_string)
             for column in csv.reader(io_string, delimiter=',', quotechar="|"):
                 currency_code = column[0]
+                current_stocks_symbols.append(currency_code)
                 currency_new_value = column[1]
                 if currency_new_value and currency_code:
                     if ForexData.objects.filter(currency_code=currency_code).exists():
@@ -263,6 +275,7 @@ class ForexFileUpload(View):
                         forex_data = ForexData(currency_code=currency_code, currency_value=currency_new_value,
                                                 currency_arrow='UP', user_id=request.user)
                         forex_data.save()
+            ForexData.objects.all().exclude(currency_code__in=current_stocks_symbols).delete()
             messages.success(request, "Forex Data Updated Successfully")
             return redirect('/forex_file_upload/')
         except Exception as e:

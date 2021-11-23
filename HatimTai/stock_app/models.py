@@ -11,7 +11,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     CNIC = models.CharField(max_length=20, blank=True, null=True)
-    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True, unique=True)
     role = models.CharField(max_length=6, default='User', null=None, blank=False)
 
     @property
@@ -42,7 +42,7 @@ class Stocks(models.Model):
 
 class ForexData(models.Model):
     forex_id = models.AutoField(primary_key=True)
-    currency_code = models.CharField(max_length=5, unique=True, null=None, blank=False)
+    currency_code = models.CharField(max_length=15, unique=True, null=None, blank=False)
     currency_value = models.CharField(blank=False, null=None, max_length=250)
     rate_diff = models.CharField(blank=False, null=None, max_length=250, default='0.0')
     currency_arrow = models.CharField(blank=False, max_length=10, default='DEFAULT')
