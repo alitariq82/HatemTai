@@ -85,7 +85,7 @@ class Login(View):
                 return redirect('/accounts/login')
             auth.login(request, user)
             return redirect('/market_summary/')
-        elif User.objects.get(phone_number=user_name):
+        elif User.objects.filter(phone_number=user_name).first():
             user_name = User.objects.get(phone_number=user_name).username
             user = auth.authenticate(username=user_name, password=password)
             if user:
@@ -96,7 +96,7 @@ class Login(View):
                 auth.login(request, user)
                 return redirect('/market_summary/')
         else:
-            messages.error(request, "Either email or password is incorrect")
+            messages.error(request, "Either email/phone or password is incorrect")
             return redirect('/accounts/login')
 
 
@@ -152,7 +152,7 @@ class Register(View):
                                       "your registered email address. Kindly activate your account by clicking on "
                                       "the link ")
             return redirect("/accounts/login/")
-        messages.error(request, "User already exists with these credentials. Please try with another email address")
+        messages.error(request, "User already exists with these credentials. Please try with another email address or phone number")
         return redirect("/register")
 
 
