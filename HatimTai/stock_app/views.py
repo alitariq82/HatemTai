@@ -49,6 +49,8 @@ class Index(View):
             # for code, price in rates.items():
             #     print('code:', code)
             #     print('value: ', price)
+            symbols = ['BTC', 'ETH', 'BNB', 'SOL', 'ADA', 'XRP', 'DOT', 'DOGE', 'LTC', 'LINK']
+            crypto_data = list(filter(lambda data: data['symbol'] in symbols, crypto_data))
             return render(request, 'index.html', {'user': request.user, 'forex': forex, 'crypto': crypto_data})
         except Exception as e:
             return redirect('/')
@@ -82,7 +84,7 @@ class Login(View):
                 messages.error(request, "Account is not Activated. Please activate your account first")
                 return redirect('/accounts/login')
             auth.login(request, user)
-            return redirect('/')
+            return redirect('/market_summary/')
         else:
             messages.error(request, "Either email or password is incorrect")
             return redirect('/accounts/login')

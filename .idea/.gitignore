@@ -1,3 +1,15 @@
 # Default ignored files
 /shelf/
-/workspace.xml
+/workspace.xml*.egg-info
+*.pot
+*.py[co]
+.tox/
+stock_app/migrations/__pycache__
+stock_app/__pycache__
+HatimTai/__pycache__
+MANIFEST
+dist/
+docs/_build/
+docs/locale/
+
+

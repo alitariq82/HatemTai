@@ -24,19 +24,17 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" class="nav-logo"></a>
+    <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" class="nav-logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse navul" id="navbarScroll">
       <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
-        </li>
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link active" aria-current="page" href="/">Home</a>-->
+<!--        </li>-->
+
         {% if request.user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="/market_summary/">Market Summary</a>
@@ -53,6 +51,10 @@
         {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="#">Stock Trading</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">About Us</a>
         </li>
 
       </ul>

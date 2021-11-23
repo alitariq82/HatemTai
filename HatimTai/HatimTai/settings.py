@@ -94,9 +94,9 @@ WSGI_APPLICATION = 'HatimTai.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hatem_db',
-        'USER': 'zeeshan',
-        'PASSWORD': 'zeeshan',
+        'NAME': 'testDB',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
