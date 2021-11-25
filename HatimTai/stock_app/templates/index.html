@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+{% load converter %}
 
 {% block content %}
 
     <div class="container-fluid home-banner">
-        <h1 class="top-heading-home">Invest better with <span>Hatem Tai</span> <br>Stock Advisor</h1>
+        <h1 class="top-heading-home">Invest better with <span>Hatem Tai</span> <br>Financial Advisor</h1>
       </div>
 
       <div class="col-sm-12  KSE-div">
@@ -158,7 +159,7 @@
                   {% for crypt in crypto %}
                     <tr>
                       <th scope="row" class="text-left">{{crypt.name}}</th>
-                     <td>{{crypt.quote.USD.price}}</td>
+                     <td>{{crypt.quote.USD.price | convert}}</td>
 
                     </tr>
                   {% endfor %}
