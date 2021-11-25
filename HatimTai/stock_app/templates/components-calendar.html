@@ -164,9 +164,13 @@
                                     <h6><b>Disclaimer:</b></h6>
                                     <p>HatemTai is just proposing the script based on our database and analysis. User is
                                         responsible himself why taking his own decision.</p>
-                                    <div class="modal-footer">
+                                    <div class="modal-footer" style="display: flex; flex-direction: row; justify-content: space-between;">
 <!--                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                        <form action="/delete_event/" method="POST">
+                                             <button type="button"  id="delete_event" class="btn btn-danger">Delete</button>
+                                        </form>
                                         <button type="submit" class="btn btn-primary">Submit</button>
+
                                     </div>
                                 </form>
                             </div>

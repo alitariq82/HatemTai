@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', stock_views.Index.as_view()),
     path('hit_forex/', stock_views.HitForexApi.as_view()),
+    path('delete_event/', stock_views.DeleteEvent.as_view()),
     path('add_event/', stock_views.AddEvents.as_view()),
     path('handle_time_data/', stock_views.HandleTime.as_view()),
     path('forex_file_upload/', stock_views.ForexFileUpload.as_view()),

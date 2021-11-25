@@ -63,7 +63,24 @@ $(document).ready(function() {
                 }
             })
 
-
+    $('#delete_event').click(function(){
+        event_id = $('#event_id').val();
+        if (!event_id){
+            alert('Event does not exists');
+            return false;
+        }
+        $.ajax({
+            url: '/delete_event/',
+            method: 'POST',
+            data: {'event_id': event_id},
+            success: function(){
+                window.location.href = '/market_summary/';
+            },
+            error: function(err){
+                alert('Failed to delete the event')
+            }
+        })
+    })
     /* initialize the calendar
     -----------------------------------------------------------------*/
 
@@ -72,6 +89,7 @@ $(document).ready(function() {
 });
 
 function getCalender(allEvents){
+    $('#calendar').fullCalendar( 'changeView', 'agendaDay');
     var calendar =  $('#calendar').fullCalendar({
         header: {
             left: 'title',
@@ -83,7 +101,7 @@ function getCalender(allEvents){
         firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
         selectable: true,
         selectHelper: true,
-        defaultView: 'month',
+        defaultView: 'agendaDay',
 
         axisFormat: 'h:mm',
         columnFormat: {
@@ -105,7 +123,7 @@ function getCalender(allEvents){
             if (user_type != 'Admin'){
                 return false;
             }
-            if (start.getDate() < new Date().getDate()){
+            if (start.getDate() < new Date().getDate() && start.getMonth() <= new Date().getMonth()){
                 alert('Past date entry is not allowed');
                 return false;
             }

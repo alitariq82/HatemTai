@@ -344,3 +344,12 @@ class HandleTime(View):
             return redirect('/index/')
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class DeleteEvent(View):
+    def post(self, request):
+        event_id = request.POST.get('event_id')
+        if event_id:
+            Event.objects.get(event_id=event_id).delete()
+            return JsonResponse({'success': True, 'status_code': 200})
+        else:
+            raise Exception
