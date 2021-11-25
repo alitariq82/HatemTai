@@ -110,14 +110,19 @@
                             {% endfor %}
                          {% endif %}
                     </div>
-                    <div id="modal">
+                    <div id="modal" style="display: flex; flex-direction: row; justify-content: space-between;">
                         {% if user.role == 'Admin' %}
                         <a class="btn btn-primary button" id="admin_popup" href="#popup1" hidden></a>
                         <a class="btn btn-primary button" id="admin_popup" href="/">Back to home</a>
+
                         {% else %}
                         <a class="btn btn-primary button" href="#popup2" hidden></a>
                         <a class="btn btn-primary button" href="/">Back to home</a>
                         {% endif %}
+                        <form class="d-flex" action="/logout/" method="get">
+                            <button class="btn btn-primary navbt theme-btn-colors" type="submit">Logout</button>
+                        </form>
+
                     </div>
 
                     <!-- popup 1 -->

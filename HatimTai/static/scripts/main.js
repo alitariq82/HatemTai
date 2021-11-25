@@ -105,6 +105,10 @@ function getCalender(allEvents){
             if (user_type != 'Admin'){
                 return false;
             }
+            if (start.getDate() < new Date().getDate()){
+                alert('Past date entry is not allowed');
+                return false;
+            }
             var eventsCount = 0;
             var date = moment(start).format("YYYY-MM-DD");
             $('#calendar').fullCalendar('clientEvents', function(event) {
