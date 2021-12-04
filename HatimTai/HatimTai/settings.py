@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stock_app',
     'whitenoise.runserver_nostatic',
+    'webpush',
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'zeeshanul2121@gmail.com'
 EMAIL_HOST_PASSWORD = 'Football-07'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+WEBPUSH_SETTINGS = {
+   "VAPID_PUBLIC_KEY": "BE4aLbZYC6UM1Kl9JA9dYJsUpcgMPXObX_xvi6fD5VmwQaxR2K5i9XHFM_xXxqmoT762jKxFuXlxxxA-xaKcjR8",
+   "VAPID_PRIVATE_KEY": "jWC7ZYalJhqKj59KGbbxNmox7432clj-kYUs5t6433Y",
+   "VAPID_ADMIN_EMAIL": "zeeshanul2121@gmail.com"
+}

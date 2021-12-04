@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import auth
 from .forms import UserForm as UserForm
 from django.contrib import messages
-from .models import User as User, Stocks as Stocks, ForexData, Event
+from .models import User as User, Stocks as Stocks, ForexData, Event, Notification, UserNotification
 from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -23,6 +23,8 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from webpush import send_user_notification
+from HatimTai import settings
 
 
 class Index(View):
@@ -49,9 +51,13 @@ class Index(View):
             # for code, price in rates.items():
             #     print('code:', code)
             #     print('value: ', price)
+            webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
+            vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
             symbols = ['BTC', 'ETH', 'BNB', 'SOL', 'ADA', 'XRP', 'DOT', 'DOGE', 'LTC', 'LINK']
             crypto_data = list(filter(lambda data: data['symbol'] in symbols, crypto_data))
-            return render(request, 'index.html', {'user': request.user, 'forex': forex, 'crypto': crypto_data})
+            return render(request, 'index.html', {'user': request.user, 'forex': forex,
+                                                  'crypto': crypto_data, 'vapid_key': vapid_key
+                                                  })
         except Exception as e:
             return redirect('/')
 
@@ -61,7 +67,9 @@ class MarketSummary(View):
         # <view logic>
         try:
             user = request.user
-            return render(request, 'components-calendar.html', {'user': user})
+            webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
+            vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
+            return render(request, 'components-calendar.html', {'user': user, 'vapid_key': vapid_key})
         except Exception as e:
             return redirect('/')
 
@@ -296,6 +304,15 @@ class AddEvents(View):
         end = datetime.strptime(end.split('GMT')[0].strip(), "%a %b %d %Y %H:%M:%S")
         event = Event(event_title=title, start_date=start, end_date=end)
         event.save()
+        # region notifications
+        notification = Notification(notification_message=title)
+        notification.save()
+        all_users = User.objects.filter(role='User')
+        for user in all_users:
+            user_notify = UserNotification(notification_id=notification, user_id=user)
+            user_notify.save()
+        # endregion
+        self.send_notifications(request)
         event_id = event.event_id
         all_events = list(Event.objects.all().order_by('event_id').values())
         return JsonResponse({'data': all_events, 'event_id': event_id, 'success': True, 'status': 200})
@@ -304,6 +321,13 @@ class AddEvents(View):
         all_events = list(Event.objects.all().order_by('-event_id').values())
         return JsonResponse({'data': all_events, 'success': True, 'status': 200})
 
+    def send_notifications(self, request):
+        all_users = User.objects.filter(role='User')
+        for user in all_users:
+            header = 'Event'
+            body = request.POST.get('title')
+            payload = {'head': header, 'body': body}
+            send_user_notification(user=user, payload=payload, ttl=1000)
 
 def process_date(date):
     date_splited = date.split('GMT')[0]

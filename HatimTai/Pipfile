@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
-psycopg2 = "*"
 forex-python = "*"
+django-webpush = "*"
 
 [dev-packages]
 

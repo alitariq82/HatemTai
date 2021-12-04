@@ -16,9 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+from django.views.generic import TemplateView
+
+from . import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('stock_app.urls')),
-    path('', include('django.contrib.auth.urls'))
-]
+    path('', include('django.contrib.auth.urls')),
+    path('webpush/', include('webpush.urls')),
+    path('sw.js', TemplateView.as_view(template_name='sw.js', content_type='application/x-javascript'))
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

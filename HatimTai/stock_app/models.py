@@ -60,3 +60,20 @@ class Event(models.Model):
 
     class Meta:
         db_table = "Event"
+
+
+class Notification(models.Model):
+    notification_id = models.AutoField(primary_key=True)
+    notification_message = models.TextField()
+
+    class Meta:
+        db_table = "Notification"
+
+
+class UserNotification(models.Model):
+    user_notification_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='user_id')
+    status = models.CharField(max_length=25, default="Unread", blank=False)
+    notification_id = models.ForeignKey('Notification', on_delete=models.CASCADE, db_column='notification_id')
+
+
