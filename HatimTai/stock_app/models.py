@@ -77,3 +77,10 @@ class UserNotification(models.Model):
     notification_id = models.ForeignKey('Notification', on_delete=models.CASCADE, db_column='notification_id')
 
 
+class News(models.Model):
+    news_id = models.AutoField(primary_key=True)
+    news_title = models.TextField()
+    news_link = models.TextField()
+
+    class Meta:
+        db_table = "News"

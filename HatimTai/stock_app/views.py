@@ -6,7 +6,8 @@ from django.contrib.auth import login
 from django.contrib.auth.models import auth
 from .forms import UserForm as UserForm
 from django.contrib import messages
-from .models import User as User, Stocks as Stocks, ForexData, Event, Notification, UserNotification
+from .models import *
+    # User as User, Stocks as Stocks, ForexData, Event, Notification, UserNotification
 from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -28,6 +29,8 @@ from HatimTai import settings
 
 
 class Index(View):
+    def get_news(self, request):
+        pass
     def get(self, request):
         # <view logic>
         try:
@@ -55,8 +58,13 @@ class Index(View):
             vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
             symbols = ['BTC', 'ETH', 'BNB', 'SOL', 'ADA', 'XRP', 'DOT', 'DOGE', 'LTC', 'LINK']
             crypto_data = list(filter(lambda data: data['symbol'] in symbols, crypto_data))
+
+            # region News Data
+            news = News.objects.all().order_by('-news_id')
+            # endregion
             return render(request, 'index.html', {'user': request.user, 'forex': forex,
-                                                  'crypto': crypto_data, 'vapid_key': vapid_key
+                                                  'crypto': crypto_data, 'vapid_key': vapid_key,
+                                                  'news': news,
                                                   })
         except Exception as e:
             return redirect('/')
@@ -377,3 +385,27 @@ class DeleteEvent(View):
             return JsonResponse({'success': True, 'status_code': 200})
         else:
             raise Exception
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AddNews(View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        title = request.POST.get('news_title')
+        link = request.POST.get('news_link')
+        news = News(news_title=title, news_link=link)
+        news.save()
+        return redirect('/')
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DeleteNews(View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        news_id = request.POST.get('news_id')
+        News.objects.get(news_id=news_id).delete()
+        return redirect('/')

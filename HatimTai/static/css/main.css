@@ -23585,3 +23585,8 @@ body {
     content:" *";
     color:red;
 }
+
+.news-box {
+  height: 300px;
+  overflow-y: auto;
+}
