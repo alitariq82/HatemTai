@@ -7,6 +7,9 @@
 *.pyc
 __pycache__/
 HatimTai/HatimTai/settings.py
+HatimTai/__pycache__/
+stock_app/__pycache__
+stock_app/templatetags/__pycache__/
 db.sqlite3
 db.sqlite3-journal
 media
