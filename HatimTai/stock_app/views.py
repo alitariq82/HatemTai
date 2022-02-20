@@ -24,7 +24,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from webpush import send_user_notification
+from webpush import send_group_notification
 from HatimTai import settings
 
 
@@ -56,6 +56,7 @@ class Index(View):
             #     print('value: ', price)
             webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
             vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
+            webpush = {"group": 'subscribers'}
             symbols = ['BTC', 'ETH', 'BNB', 'SOL', 'ADA', 'XRP', 'DOT', 'DOGE', 'LTC', 'LINK']
             crypto_data = list(filter(lambda data: data['symbol'] in symbols, crypto_data))
 
@@ -64,7 +65,7 @@ class Index(View):
             # endregion
             return render(request, 'index.html', {'user': request.user, 'forex': forex,
                                                   'crypto': crypto_data, 'vapid_key': vapid_key,
-                                                  'news': news,
+                                                  'news': news, 'webpush': webpush
                                                   })
         except Exception as e:
             return redirect('/')
@@ -330,12 +331,16 @@ class AddEvents(View):
         return JsonResponse({'data': all_events, 'success': True, 'status': 200})
 
     def send_notifications(self, request):
-        all_users = User.objects.filter(role='User')
-        for user in all_users:
-            header = 'Event'
-            body = request.POST.get('title')
-            payload = {'head': header, 'body': body}
-            send_user_notification(user=user, payload=payload, ttl=1000)
+        header = 'Event'
+        body = request.POST.get('title')
+        payload = {'head': header, 'body': body}
+        send_group_notification(group_name="subscribers", payload=payload, ttl=1000)
+
+        # for user in all_users:
+        #     header = 'Event'
+        #     body = request.POST.get('title')
+        #     payload = {'head': header, 'body': body}
+        #     send_user_notification(user=user, payload=payload, ttl=1000)
 
 def process_date(date):
     date_splited = date.split('GMT')[0]

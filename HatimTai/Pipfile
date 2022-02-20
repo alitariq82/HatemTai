@@ -4,9 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+django = "==3.2.9"
 forex-python = "*"
 django-webpush = "*"
+whitenoise = "*"
+six = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
