@@ -132,7 +132,7 @@
                         <div class="col-md-10">
                             <bold>TITLE: </bold> <span>{{nw.news_title}}</span>
                             <br />
-                            <bold>Link: </bold> <span>{{nw.news_link}}</span>
+                            <bold>Link: </bold> <a href="{{nw.news_link}}">{{nw.news_link}}</a>
                         </div>
                         {% if request.user.role == 'Admin' %}
                             <div class="col-md-2">
