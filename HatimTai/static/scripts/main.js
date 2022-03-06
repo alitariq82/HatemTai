@@ -143,6 +143,7 @@ function getCalender(allEvents){
                 return false;
             }
             var title = prompt('Event Title:');
+            $('#open_loader')[0].click()
              if (title) {
                 calendar.fullCalendar('renderEvent',
                     {
@@ -159,9 +160,8 @@ function getCalender(allEvents){
                 method: 'POST',
                 data: {'title': title, 'start': start, 'end': end},
                 success : function(response){
-
+                    $('#close_loader')[0].click()
                     allEvents = []
-                    alert('Event Added Successfully')
                     for (event of response.data){
                         eventObject = {
                             allDay: false,
@@ -181,6 +181,7 @@ function getCalender(allEvents){
                     $('#calendar').fullCalendar('removeEvents')
                     $('#calendar').fullCalendar('addEventSource', allEvents);
                     $('#calendar').fullCalendar('rerenderEvents' );
+                    alert('Event Added Successfully')
                 },
                 error: function(){
                     alert('Failed to add the event')

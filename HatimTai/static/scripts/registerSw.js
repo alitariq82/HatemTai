@@ -66,7 +66,6 @@ const sendSubData = async (subscription) => {
     const browser = navigator.userAgent.match(/(firefox|msie|chrome|safari|trident)/ig)[0].toLowerCase();
     const data = {
         status_type: 'subscribe',
-        group: 'subscribers',
         subscription: subscription.toJSON(),
         browser: browser,
     };
@@ -77,6 +76,7 @@ const sendSubData = async (subscription) => {
         headers: {
             'content-type': 'application/json'
         },
+        credentials: "include"
     });
 
     handleResponse(res);
