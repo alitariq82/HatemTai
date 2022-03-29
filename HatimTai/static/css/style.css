@@ -60,10 +60,12 @@ body {
     float: right;
 }
 
+
 /* home page css */
+
 .home-banner {
     height: 80vh;
-    background-image: url("../images/main-banner.jpg");
+    background-image: url("assets/images/main-banner.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 200px;
@@ -82,108 +84,9 @@ body {
     color: #1B75BB;
 }
 
-/* ticker */
-/*
-.wrap {
-    font-size: 10px;
-    color: #000044;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    box-sizing: content-box;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.liveTicker {
-    font-size: 10px;
-    line-height: normal;
-    list-style-type: none;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin: 0;
-    position: relative;
-    color: #000;
-    display: inline-flex;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-    -webkit-animation-name: ticker;
-    animation-name: ticker;
-    -webkit-animation-duration: 30s;
-    animation-duration: 160s;
-}
-
-.liveTicker:hover {
-
-    animation-play-state: paused;
-
-}
-
-.quote {
-
-    font-size: 10px;
-    line-height: normal;
-    list-style-type: none;
-    padding: 0 10px 0;
-
-    font-weight: bold;
-    padding-left: 5px;
-    color: #000044;
-    white-space: nowrap;
-}
-
-.valuedown {
-    font-size: 10px;
-    line-height: normal;
-    list-style-type: none;
-    font-weight: bold;
-    padding: 0 10px 0;
-    padding-left: 2px;
-    color: #ff0000;
-    white-space: nowrap;
-}
-
-.valueup {
-    font-size: 10px;
-    line-height: normal;
-    list-style-type: none;
-    font-weight: bold;
-    padding: 0 10px 0;
-    padding-left: 2px;
-    color: #008000;
-    white-space: nowrap;
-}
-
-@-webkit-keyframes ticker {
-    0% {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        visibility: visible;
-    }
-
-    100% {
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
-    }
-}
-
-@keyframes ticker {
-    0% {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        visibility: visible;
-    }
-
-    100% {
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
-    }
-} */
 
 /* new ticker */
+
 .KSE-div {
     background: #e8e8e8;
     padding: 20px 0 40px;
@@ -238,20 +141,18 @@ span.symbolName {
     margin: 0 20px;
 }
 
+
 /* ticker-end */
 
-/* second sec */
 
-.table-container {
-    padding-top: 80px;
-    padding-bottom: 80px;
-}
+/* second sec */
 
 .bx-a {
     background: #FFFFFF;
     box-shadow: 0px 0px 31px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     padding: 10px;
+    margin-bottom: 30px;
 }
 
 .green {
@@ -268,23 +169,36 @@ span.symbolName {
     border-color: #ebebeb;
 }
 
+.table-responsive-sm {
+    overflow: auto;
+}
+
+.table>:not(:last-child)>:last-child>* {
+    border-bottom-color: #ddd;
+}
+
 .text-left {
     text-align: left;
 }
 
+.text-right {
+    text-align: right;
+}
+
+.graph {
+    margin-top: 10px;
+}
+
 .t-head {
-    padding: 20px 0px 0px 0px;
+    padding: 20px 0px 10px 0px;
     background-color: #1B75BB;
-    position: relative;
-    width: 105%;
-    top: -10px;
-    left: 2px;
     border-radius: 10px 10px 0px 0px;
+    margin: -10px -10px 20px -10px;
 }
 
 .title-text h3 {
     color: #ffffff;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 300;
     text-align: left;
     margin-top: 4px;
@@ -304,10 +218,6 @@ span.symbolName {
     border-color: #05416e;
     font-size: 12px;
     padding: 5px 10px;
-}
-
-.bx-down {
-    margin-top: 50px;
 }
 
 .my-dropdown {
@@ -356,6 +266,67 @@ span.symbolName {
     border: none;
 }
 
-/* calander css */
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 200ms;
+    visibility: hidden;
+    opacity: 0;
+}
 
-/* calander css end */
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+    z-index: 100;
+}
+
+@media screen and (max-width: 700px) {
+    .box {
+        width: 70%;
+    }
+    .popup {
+        width: 70%;
+    }
+}
+
+@media (min-width: 576px) {
+    .bx-down {
+        margin-top: 0px;
+    }
+    .table-container {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .bx-down {
+        margin-top: 0px;
+    }
+    .table-container {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+
+@media (min-width: 992px) {
+    .bx-down {
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .bx-down {
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .bx-down {
+        margin-top: 50px;
+    }
+}

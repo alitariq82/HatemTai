@@ -997,38 +997,6 @@ pre code {
     overflow-y: scroll;
 }
 
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-@media (min-width: 576px) {
-    .container {
-        max-width: 540px;
-    }
-}
-
-@media (min-width: 768px) {
-    .container {
-        max-width: 720px;
-    }
-}
-
-@media (min-width: 992px) {
-    .container {
-        max-width: 960px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1140px;
-    }
-}
-
 .container-fluid {
     width: 100%;
     padding-right: 15px;
@@ -23570,44 +23538,54 @@ body {
     margin-bottom: 20px
 }
 
-.forex_file_upload{
+.forex_file_upload {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-
 }
 
-.forexFile{
+.forexFile {
     background-color: #172236;
 }
 
-.red_star:after{
-    content:" *";
-    color:red;
+.red_star:after {
+    content: " *";
+    color: red;
 }
 
 .news-box {
-  height: 300px;
-  overflow-y: auto;
+    height: 300px;
+    overflow-y: auto;
 }
 
 .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
 }
 
+
 /* Safari */
+
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

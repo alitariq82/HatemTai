@@ -1,24 +1,20 @@
-{% extends "base.html" %}
-{% load static %}
-{% load converter %}
+{% extends "base.html" %} {% load static %} {% load converter %} {% block content %}
 
-{% block content %}
+<div class="container-fluid home-banner">
+    <h1 class="top-heading-home">Invest better with <span>Hatem Tai</span> <br>Financial Advisor</h1>
+</div>
 
-    <div class="container-fluid home-banner">
-        <h1 class="top-heading-home">Invest better with <span>Hatem Tai</span> <br>Financial Advisor</h1>
-      </div>
+<div class="col-sm-12  KSE-div">
+    <div class="KSE-div2">
+        <div class="container">
 
-      <div class="col-sm-12  KSE-div">
-        <div class="KSE-div2">
-            <div class="container">
-
-                <div class="col-sm-12 padding-zero">
-                    <marquee onmouseover="this.stop();" onmouseout="this.start();" class="marquee-padding">
-                        <div class="rates">
-                            {% for frx in forex %}
-                            <span class="symbolName">{{frx.currency_code}}</span>&nbsp;
-                            <span class="symbolRate">{{frx.currency_value}}</span>&nbsp;
-                            <span class="changeRed">&nbsp;
+            <div class="col-sm-12 padding-zero">
+                <marquee onmouseover="this.stop();" onmouseout="this.start();" class="marquee-padding">
+                    <div class="rates">
+                        {% for frx in forex %}
+                        <span class="symbolName">{{frx.currency_code}}</span>&nbsp;
+                        <span class="symbolRate">{{frx.currency_value}}</span>&nbsp;
+                        <span class="changeRed">&nbsp;
                                 {% if frx.currency_arrow == 'DOWN' %}
                                 <img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png">
                                 {% elif frx.currency_arrow == 'UP' %}
@@ -27,256 +23,254 @@
                                 <img src="https://www.psx.com.pk/psx/themes/psx/images/bluearrow.png">
                                 {% endif %}
                                 {{frx.rate_diff}}
-                            </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            {% endfor %}
-<!--                            <span class="symbolName">BYCO</span>&nbsp;-->
-<!--                            <span class="symbolRate">7.1</span>&nbsp;-->
-<!--                            <span class="changeRed">&nbsp;-->
-<!--                                <img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.02</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-<!--                            <span class="symbolName">ASL</span>&nbsp;<span class="symbolRate">17.62</span>&nbsp;-->
-<!--                            <span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">TRG</span>&nbsp;<span class="symbolRate">124.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -2.76</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">ANL</span>&nbsp;<span class="symbolRate">15.45</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PIBTL</span>&nbsp;<span class="symbolRate">8.06</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.01</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">ISL</span>&nbsp;<span class="symbolRate">77.02</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 2.72</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">BAFL</span>&nbsp;<span class="symbolRate">36.7</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.05</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">BOP</span>&nbsp;<span class="symbolRate">8.35</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.03</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">KEL</span>&nbsp;<span class="symbolRate">3.39</span>&nbsp;<span class="changeBlue">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/bluearrow.png"> 0.0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">EPCL</span>&nbsp;<span class="symbolRate">62.45</span>&nbsp;<span class="changeBlue">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/bluearrow.png"> 0.0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">AVN</span>&nbsp;<span class="symbolRate">111.9</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -1.47</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MLCF</span>&nbsp;<span class="symbolRate">34.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">LOTCHEM</span>&nbsp;<span class="symbolRate">15.56</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PIOC</span>&nbsp;<span class="symbolRate">82.25</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -3.86</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">INIL</span>&nbsp;<span class="symbolRate">169.5</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 10.29</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MUGHAL</span>&nbsp;<span class="symbolRate">83.8</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.66</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">EFERT</span>&nbsp;<span class="symbolRate">70.95</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.82</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MCB</span>&nbsp;<span class="symbolRate">159.5</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.47</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">DGKC</span>&nbsp;<span class="symbolRate">80.4</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.66</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">OGDC</span>&nbsp;<span class="symbolRate">83.8</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -1.17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PAEL</span>&nbsp;<span class="symbolRate">26.05</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.06</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">KAPCO</span>&nbsp;<span class="symbolRate">27.3</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.26</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">FCCL</span>&nbsp;<span class="symbolRate">17.6</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.35</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">AKBL</span>&nbsp;<span class="symbolRate">22.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.91</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">JSCL</span>&nbsp;<span class="symbolRate">19.25</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.05</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">FFBL</span>&nbsp;<span class="symbolRate">22.75</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">NCL</span>&nbsp;<span class="symbolRate">45.5</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.79</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">SEARL</span>&nbsp;<span class="symbolRate">228.92</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PSMC</span>&nbsp;<span class="symbolRate">205.5</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -9.21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>-->
-                    </marquee>
+                            </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {% endfor %}
+                        <!--                            <span class="symbolName">BYCO</span>&nbsp;-->
+                        <!--                            <span class="symbolRate">7.1</span>&nbsp;-->
+                        <!--                            <span class="changeRed">&nbsp;-->
+                        <!--                                <img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.02</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                        <!--                            <span class="symbolName">ASL</span>&nbsp;<span class="symbolRate">17.62</span>&nbsp;-->
+                        <!--                            <span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">TRG</span>&nbsp;<span class="symbolRate">124.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -2.76</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">ANL</span>&nbsp;<span class="symbolRate">15.45</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PIBTL</span>&nbsp;<span class="symbolRate">8.06</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.01</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">ISL</span>&nbsp;<span class="symbolRate">77.02</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 2.72</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">BAFL</span>&nbsp;<span class="symbolRate">36.7</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.05</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">BOP</span>&nbsp;<span class="symbolRate">8.35</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.03</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">KEL</span>&nbsp;<span class="symbolRate">3.39</span>&nbsp;<span class="changeBlue">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/bluearrow.png"> 0.0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">EPCL</span>&nbsp;<span class="symbolRate">62.45</span>&nbsp;<span class="changeBlue">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/bluearrow.png"> 0.0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">AVN</span>&nbsp;<span class="symbolRate">111.9</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -1.47</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MLCF</span>&nbsp;<span class="symbolRate">34.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">LOTCHEM</span>&nbsp;<span class="symbolRate">15.56</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PIOC</span>&nbsp;<span class="symbolRate">82.25</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -3.86</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">INIL</span>&nbsp;<span class="symbolRate">169.5</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 10.29</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MUGHAL</span>&nbsp;<span class="symbolRate">83.8</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.66</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">EFERT</span>&nbsp;<span class="symbolRate">70.95</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.82</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">MCB</span>&nbsp;<span class="symbolRate">159.5</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.47</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">DGKC</span>&nbsp;<span class="symbolRate">80.4</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.66</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">OGDC</span>&nbsp;<span class="symbolRate">83.8</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -1.17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PAEL</span>&nbsp;<span class="symbolRate">26.05</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.06</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">KAPCO</span>&nbsp;<span class="symbolRate">27.3</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.26</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">FCCL</span>&nbsp;<span class="symbolRate">17.6</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.35</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">AKBL</span>&nbsp;<span class="symbolRate">22.0</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.91</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">JSCL</span>&nbsp;<span class="symbolRate">19.25</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.05</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">FFBL</span>&nbsp;<span class="symbolRate">22.75</span>&nbsp;<span class="changeGreen">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-up.png"> 0.1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">NCL</span>&nbsp;<span class="symbolRate">45.5</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.79</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">SEARL</span>&nbsp;<span class="symbolRate">228.92</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -0.5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="symbolName">PSMC</span>&nbsp;<span class="symbolRate">205.5</span>&nbsp;<span class="changeRed">&nbsp;<img src="https://www.psx.com.pk/psx/themes/psx/images/arrow-down.png"> -9.21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>-->
+                </marquee>
                 </div>
             </div>
         </div>
     </div>
 
-      <!-- second section -->
-      <div class="container table-container">
-       <div class="row">
-         <div class="col-md-4 text-center">
-          <div class="bx-a">
-            <div class="row t-head">
-             <div class="col-md-2">
-              <img src="{% static 'images/market-icon.png' %}" class="tb-icon text-left">
-             </div>
-             <div class="col-md-7 title-text">
-              <h3>CRYPTO SUMMARY</h3>
-             </div>
-             <div class="col-md-3">
-              <!-- <button type="button" class="btn btn-secondary view-all-btn">View all</button> -->
-             </div>
-            </div>
-            <div class="row t-head2">
-              <div class="btn-group">
-<!--                <button type="button" class="btn btn-secondary dropdown-toggle my-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                  Right-aligned menu-->
-<!--                </button>-->
-                <div class="dropdown-menu dropdown-menu-right">
-                  <button class="dropdown-item" type="button">Action</button>
-                  <button class="dropdown-item" type="button">Another action</button>
-                  <button class="dropdown-item" type="button">Something else here</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="row graph">
-              <h5>Analytic area</h5>
-            </div>
-
-            <div class="row">
-              <div class="table-responsive-sm">
-                <table class="table without-border">
-                  <thead>
-                    <tr class="heading-row">
-                      <th scope="col"  class="text-left">CURRENCY</th>
-                      <th scope="col">PRICE</th>
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {% for crypt in crypto %}
-                    <tr>
-                      <th scope="row" class="text-left">{{crypt.name}}</th>
-                     <td>{{crypt.quote.USD.price | convert}}</td>
-
-                    </tr>
-                  {% endfor %}
-<!--                    <tr>-->
-<!--                      <th scope="row" class="text-left">BYCO</th>-->
-<!--                      <td>8.18</td>-->
-
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <th scope="row" class="text-left">ANL</th>-->
-<!--                      <td>8.18</td>-->
-
-<!--                    </tr>-->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-         </div>
-         <div class="col-md-4 text-center bx-down">
-          <div class="bx-a">
-            <div class="row t-head">
-             <div class="col-md-2">
-              <img src="{% static 'images/market-icon.png' %}" class="tb-icon text-left">
-             </div>
-             <div class="col-md-7 title-text">
-              <h3>NEWS SECTION</h3>
-             </div>
-
-                {% if request.user.role == 'Admin' %}
-                     <div class="col-md-3">
-        <!--              <button type="button" class="btn btn-secondary view-all-btn">Add News</button>-->
-                         <a class="btn btn-success button" href="#add_news"> Add NEWS</a>
-                     </div>
-                {% endif %}
-            </div>
-            <div class="row">
-                <div class="news-box" style="text-align: start !important;">
-                    {% for nw in news %}
-                    <div class="row">
-                        <div class="col-md-10">
-                            <bold>TITLE: </bold> <span>{{nw.news_title}}</span>
-                            <br />
-                            <bold>Link: </bold> <a href="{{nw.news_link}}">{{nw.news_link}}</a>
+    <!-- second section -->
+    <div class="container table-container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4 col-sm-12 col-12 text-center">
+                <div class="bx-a">
+                    <div class="row t-head">
+                        <div class="col-md-2 col-sm-2 col-2">
+                            <img src="{% static 'images/market-icon.png' %}" class="tb-icon text-left">
                         </div>
-                        {% if request.user.role == 'Admin' %}
-                            <div class="col-md-2">
-                                <form action="/delete_news/" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" value="{{nw.news_id}}" id="news_id" name="news_id">
-                                    <button type="submit" class="btn btn-danger"> Delete</button>
-                                </form>
+                        <div class="col-md-7 col-sm-8 col-10 title-text">
+                            <h3>CRYPTO SUMMARY</h3>
+                        </div>
+                        <div class="col-md-3 col-sm-2 col-12">
+                            <!-- <button type="button" class="btn btn-secondary view-all-btn">View all</button> -->
+                        </div>
+                    </div>
+                    <div class="row t-head2">
+                        <div class="btn-group">
+                            <!--                <button type="button" class="btn btn-secondary dropdown-toggle my-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                            <!--                  Right-aligned menu-->
+                            <!--                </button>-->
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Action</button>
+                                <button class="dropdown-item" type="button">Another action</button>
+                                <button class="dropdown-item" type="button">Something else here</button>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="row graph">
+                        <h5>Analytic area</h5>
+                    </div>
+
+                    <div class="row">
+                        <div class="table-responsive-sm">
+                            <table class="table without-border">
+                                <thead>
+                                    <tr class="heading-row">
+                                        <th scope="col" class="text-left">CURRENCY</th>
+                                        <th scope="col">PRICE</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for crypt in crypto %}
+                                    <tr>
+                                        <th scope="row" class="text-left">{{crypt.name}}</th>
+                                        <td>{{crypt.quote.USD.price | convert}}</td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    <!--                    <tr>-->
+                                    <!--                      <th scope="row" class="text-left">BYCO</th>-->
+                                    <!--                      <td>8.18</td>-->
+
+                                    <!--                    </tr>-->
+                                    <!--                    <tr>-->
+                                    <!--                      <th scope="row" class="text-left">ANL</th>-->
+                                    <!--                      <td>8.18</td>-->
+
+                                    <!--                    </tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-sm-12 col-12 text-center bx-down">
+                <div class="bx-a">
+                    <div class="row t-head">
+                        <div class="col-md-2 col-sm-2 col-2">
+                            <img src="{% static 'images/market-icon.png' %}" class="tb-icon text-left">
+                        </div>
+                        <div class="col-md-6 col-sm-7 col-10 title-text">
+                            <h3>NEWS SECTION</h3>
+                        </div>
+
+                        {% if request.user.role == 'Admin' %}
+                        <div class="col-md-4 col-sm-3 col-12">
+                            <!--              <button type="button" class="btn btn-secondary view-all-btn">Add News</button>-->
+                            <a class="btn btn-success button" href="#add_news"> Add News</a>
+                        </div>
                         {% endif %}
                     </div>
-                    <hr />
-                    <br />
-                    {% endfor %}
-                    <br />
+                    <div class="row">
+                        <div class="news-box" style="text-align: start !important;">
+                            {% for nw in news %}
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <bold>TITLE: </bold> <span>{{nw.news_title}}</span>
+                                    <br />
+                                    <bold>Link: </bold> <a href="{{nw.news_link}}">{{nw.news_link}}</a>
+                                </div>
+                                {% if request.user.role == 'Admin' %}
+                                <div class="col-md-2">
+                                    <form action="/delete_news/" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{nw.news_id}}" id="news_id" name="news_id">
+                                        <button type="submit" class="btn btn-danger"> Delete</button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <hr />
+                            <br /> {% endfor %}
+                            <br />
 
+                        </div>
+                        <!--              <div class="table-responsive-sm">-->
+                        <!--                <table class="table">-->
+                        <!--                  <thead>-->
+                        <!--&lt;!&ndash;                  {% for crypt in crypto %}&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                      <th scope="row" class="text-left">{{crypt.name}}</th>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                      <td>{{crypt.quote.USD.price}}</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                      <td>4.31</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                      <td>3.1</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        {% if crypt.quote.USD.volume_change_24h < 0%}&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td class="red">{{crypt.quote.USD.volume_change_24h}}</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        {% else %}&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td class="green">{{crypt.quote.USD.volume_change_24h}}</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        {% endif %}&ndash;&gt;-->
+                        <!--&lt;!&ndash;                      <td class="text-right">{{crypt.quote.USD.volume_24h}}</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                  {% endfor %}&ndash;&gt;-->
+                        <!--                    <tr class="heading-row">-->
+                        <!--                      <th scope="col"  class="text-left">SCRIP</th>-->
+                        <!--                      <th scope="col">PRICE</th>-->
+                        <!--                      <th scope="col">HIGH</th>-->
+                        <!--                      <th scope="col">LOW</th>-->
+                        <!--                      <th scope="col">CHANGE</th>-->
+                        <!--                      <th scope="col">VOLUME</th>-->
+                        <!--                    </tr>-->
+                        <!--                  </thead>-->
+                        <!--                  <tbody>-->
+                        <!--                    <tr>-->
+                        <!--                      <th scope="row" class="text-left">KEL</th>-->
+                        <!--                      <td>4</td>-->
+                        <!--                      <td>4.31</td>-->
+                        <!--                      <td>3.1</td>-->
+                        <!--                      <td class="green">.69</td>-->
+                        <!--                      <td class="text-right">32,484,500</td>-->
+                        <!--                    </tr>-->
+                        <!--                    <tr>-->
+                        <!--                      <th scope="row" class="text-left">BYCO</th>-->
+                        <!--                      <td>8.18</td>-->
+                        <!--                      <td>8.33</td>-->
+                        <!--                      <td>7.48</td>-->
+                        <!--                      <td class="green">.45</td>-->
+                        <!--                      <td class="text-right">29,767,000</td>-->
+                        <!--                    </tr>-->
+                        <!--                    <tr>-->
+                        <!--                      <th scope="row" class="text-left">ANL</th>-->
+                        <!--                      <td>8.18</td>-->
+                        <!--                      <td>8.33</td>-->
+                        <!--                      <td>7.48</td>-->
+                        <!--                      <td class="red">.45</td>-->
+                        <!--                      <td class="text-right">29,767,000</td>-->
+                        <!--                    </tr>-->
+                        <!--                  </tbody>-->
+                        <!--                </table>-->
+                        <!--              </div>-->
+                    </div>
                 </div>
-<!--              <div class="table-responsive-sm">-->
-<!--                <table class="table">-->
-<!--                  <thead>-->
-<!--&lt;!&ndash;                  {% for crypt in crypto %}&ndash;&gt;-->
-<!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                      <th scope="row" class="text-left">{{crypt.name}}</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                      <td>{{crypt.quote.USD.price}}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                      <td>4.31</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                      <td>3.1</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                        {% if crypt.quote.USD.volume_change_24h < 0%}&ndash;&gt;-->
-<!--&lt;!&ndash;                            <td class="red">{{crypt.quote.USD.volume_change_24h}}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                        {% else %}&ndash;&gt;-->
-<!--&lt;!&ndash;                            <td class="green">{{crypt.quote.USD.volume_change_24h}}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                        {% endif %}&ndash;&gt;-->
-<!--&lt;!&ndash;                      <td class="text-right">{{crypt.quote.USD.volume_24h}}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                  {% endfor %}&ndash;&gt;-->
-<!--                    <tr class="heading-row">-->
-<!--                      <th scope="col"  class="text-left">SCRIP</th>-->
-<!--                      <th scope="col">PRICE</th>-->
-<!--                      <th scope="col">HIGH</th>-->
-<!--                      <th scope="col">LOW</th>-->
-<!--                      <th scope="col">CHANGE</th>-->
-<!--                      <th scope="col">VOLUME</th>-->
-<!--                    </tr>-->
-<!--                  </thead>-->
-<!--                  <tbody>-->
-<!--                    <tr>-->
-<!--                      <th scope="row" class="text-left">KEL</th>-->
-<!--                      <td>4</td>-->
-<!--                      <td>4.31</td>-->
-<!--                      <td>3.1</td>-->
-<!--                      <td class="green">.69</td>-->
-<!--                      <td class="text-right">32,484,500</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <th scope="row" class="text-left">BYCO</th>-->
-<!--                      <td>8.18</td>-->
-<!--                      <td>8.33</td>-->
-<!--                      <td>7.48</td>-->
-<!--                      <td class="green">.45</td>-->
-<!--                      <td class="text-right">29,767,000</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <th scope="row" class="text-left">ANL</th>-->
-<!--                      <td>8.18</td>-->
-<!--                      <td>8.33</td>-->
-<!--                      <td>7.48</td>-->
-<!--                      <td class="red">.45</td>-->
-<!--                      <td class="text-right">29,767,000</td>-->
-<!--                    </tr>-->
-<!--                  </tbody>-->
-<!--                </table>-->
-<!--              </div>-->
             </div>
-          </div>
-         </div>
-         <div class="col-md-4 text-center bx-down">
-          <div class="bx-a">
-            <div class="row p-4">
-             <div class="col">
-               Request
-             </div>
-             <div class="col">
-              <button type="button" class="btn btn-success">Success</button>
-             </div>
-            </div>
+            <div class="col-md-12 col-lg-4 col-sm-12 col-12 text-center bx-down">
+                <div class="bx-a">
+                    <div class="row p-4">
+                        <div class="col text-left">
+                            Request
+                        </div>
+                        <div class="col text-right">
+                            <button type="button" class="btn btn-success">Success</button>
+                        </div>
+                    </div>
 
-            <div class="row pb-4">
-              <div class="btn-group">
-                <button type="button" class="btn btn-secondary dropdown-toggle my-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="row pb-4">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle my-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Right-aligned menu
                 </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <button class="dropdown-item" type="button">Action</button>
-                  <button class="dropdown-item" type="button">Another action</button>
-                  <button class="dropdown-item" type="button">Something else here</button>
-                </div>
-              </div>
-            </div>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">Action</button>
+                                <button class="dropdown-item" type="button">Another action</button>
+                                <button class="dropdown-item" type="button">Something else here</button>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="row">
-              <div class="table-responsive-sm">
-                <table class="table">
-                  <thead>
-                    <tr class="heading-row">
-                      <th scope="col"  class="text-left">SCRIP</th>
-                      <th scope="col">PRICE</th>
-                      <th scope="col">HIGH</th>
-                      <th scope="col">LOW</th>
-                      <th scope="col">CHANGE</th>
-                      <th scope="col">VOLUME</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row" class="text-left">KEL</th>
-                      <td>4</td>
-                      <td>4.31</td>
-                      <td>3.1</td>
-                      <td class="green"><span>&#9650;</span> .69</td>
-                      <td class="text-right">32,484,500</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="text-left">BYCO</th>
-                      <td>8.18</td>
-                      <td>8.33</td>
-                      <td>7.48</td>
-                      <td class="green"><span>&#9650;</span>.45</td>
-                      <td class="text-right">29,767,000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="text-left">ANL</th>
-                      <td>8.18</td>
-                      <td>8.33</td>
-                      <td>7.48</td>
-                      <td class="red"><span>&#9660; </span>.45</td>
-                      <td class="text-right">29,767,000</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                    <div class="row">
+                        <div class="table-responsive-sm">
+                            <table class="table">
+                                <thead>
+                                    <tr class="heading-row">
+                                        <th scope="col" class="text-left">SCRIP</th>
+                                        <th scope="col">PRICE</th>
+                                        <th scope="col">HIGH</th>
+                                        <th scope="col">LOW</th>
+                                        <th scope="col">CHANGE</th>
+                                        <th scope="col">VOLUME</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="text-left">KEL</th>
+                                        <td>4</td>
+                                        <td>4.31</td>
+                                        <td>3.1</td>
+                                        <td class="green"><span>&#9650;</span> .69</td>
+                                        <td class="text-right">32,484,500</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-left">BYCO</th>
+                                        <td>8.18</td>
+                                        <td>8.33</td>
+                                        <td>7.48</td>
+                                        <td class="green"><span>&#9650;</span>.45</td>
+                                        <td class="text-right">29,767,000</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="text-left">ANL</th>
+                                        <td>8.18</td>
+                                        <td>8.33</td>
+                                        <td>7.48</td>
+                                        <td class="red"><span>&#9660; </span>.45</td>
+                                        <td class="text-right">29,767,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-         </div>
-       </div>
-      </div>
+        </div>
+    </div>
 
 
 
@@ -312,35 +306,33 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="news_title">News Title:</label>
-                                <input type="text" class="form-control" id="news_title"
-                                       name="news_title" placeholder="Title of the news" required>
+                                <input type="text" class="form-control" id="news_title" name="news_title" placeholder="Title of the news" required>
                             </div>
                             <div class="form-group">
                                 <label for="news_link">News Link:</label>
-                                <input type="text"  class="form-control" id="news_link"
-                                       name="news_link" placeholder="Link of the news" required>
+                                <input type="text" class="form-control" id="news_link" name="news_link" placeholder="Link of the news" required>
                             </div>
                         </div>
-<!--                        <div class="col-md-6">-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="stop_loss">Stop Loss:</label>-->
-<!--                                <input type="number" class="form-control" id="stop_loss" name="stop_loss"-->
-<!--                                    placeholder=" Stop loss here" min="0" required>-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="holding_period">Holding Period:</label>-->
-<!--                                <input type="text" class="form-control" id="holding_period"-->
-<!--                                    placeholder=" Holding Period here" name="holding_period" required>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                        <div class="col-md-6">-->
+                        <!--                            <div class="form-group">-->
+                        <!--                                <label for="stop_loss">Stop Loss:</label>-->
+                        <!--                                <input type="number" class="form-control" id="stop_loss" name="stop_loss"-->
+                        <!--                                    placeholder=" Stop loss here" min="0" required>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="form-group">-->
+                        <!--                                <label for="holding_period">Holding Period:</label>-->
+                        <!--                                <input type="text" class="form-control" id="holding_period"-->
+                        <!--                                    placeholder=" Holding Period here" name="holding_period" required>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                     </div>
                     <br>
 
                     <div class="modal-footer" style="display: flex; flex-direction: row; justify-content: center;">
-<!--                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-<!--                        <form action="/delete_event/" method="POST">-->
-<!--                             <button type="button"  id="delete_event" class="btn btn-danger">Delete</button>-->
-<!--                        </form>-->
+                        <!--                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                        <!--                        <form action="/delete_event/" method="POST">-->
+                        <!--                             <button type="button"  id="delete_event" class="btn btn-danger">Delete</button>-->
+                        <!--                        </form>-->
                         <button type="submit" class="btn btn-primary">Add</button>
 
                     </div>
@@ -350,4 +342,4 @@
         </div>
     </div>
 
-{% endblock %}
+    {% endblock %}
